@@ -1,0 +1,38 @@
+.menu .link::after {
+  content: "";
+ 
+  display: block;
+  height: 0.150rem;
+  background: #EBCB8B;
+ 
+  transform: scale(0);
+  transition: transform .6s;
+ 
+  transform-origin: right;
+ 
+  animation: fade-in .6s;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.2;
+  }
+  60% {
+    opacity: 0.4;
+  }
+  90% {
+    opacity: 0.6;
+  }
+ 
+  100% {
+    opacity: 1;
+  }
+}
+
+  .menu .link:hover::after {
+    transform: scale(1);
+    transform-origin: left;
+  }

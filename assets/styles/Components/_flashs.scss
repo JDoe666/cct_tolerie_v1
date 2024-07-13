@@ -1,0 +1,29 @@
+.alert {
+    padding: 0.5rem 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 18px;
+    color: black;
+
+    &-success {
+        background-color: rgba(14, 120, 14, 0.301);
+    }
+
+    &-danger {
+        background-color: rgba(164, 28, 28, 0.301);
+    }
+
+    &-success-form {
+        background-color: rgba(14, 120, 14, 0.301);
+        width:50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &-danger-form {
+        background-color: rgba(164, 28, 28, 0.301);
+        width:50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
