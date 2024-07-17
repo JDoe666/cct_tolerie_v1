@@ -17,8 +17,10 @@
 	</head>
 	<body>
 		{% include 'Frontend/Layout/header.html.twig' %}
+		<main>
 		{% include 'Frontend/Layout/flash.html.twig' %}
 		{% block body %}{% endblock %}
+		</main>
 		{% include 'Frontend/Layout/footer.html.twig' %}
 	</body>
 </html>

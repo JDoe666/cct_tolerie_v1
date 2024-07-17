@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}}
+	Utilisateurs
+{% endblock %}
+
+{% block body %}
+	{% include 'Backend/Navigation/_adminNavigation.html.twig' %}
+	<h2 class="text-center">
+		Administration des utilisateurs
+	</h2>
+	<section class="container">
+		<table class="admin-table">
+			<thead>
+				<tr>
+					<th scope="col">Prénom</th>
+					<th scope="col">Nom</th>
+					<th scope="col">Email</th>
+					<th scope="col">Roles</th>
+					<th scope="col">Vérifié</th>
+					<th scope="col">Modifier</th>
+					<th scope="col">Supprimer</th>
+				</tr>
+			</thead>
+			<tbody class="admin-table-tbody">
+				{% for user in users %}
+					<tr>
+						<td>{{user.firstname}}</td>
+						<td>{{user.lastname}}</td>
+						<td>{{user.email}}</td>
+						<td>
+						{% for role in user.roles %}
+							{{role}}
+						{% endfor %}
+						</td>
+						<td>{{user.isVerified}}</td>
+						<td><a href="{{path('admin_users_update', {id: user.id})}}">Modifier</a></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</section>
+{% endblock %}

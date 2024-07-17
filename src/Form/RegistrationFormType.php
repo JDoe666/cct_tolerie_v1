@@ -36,7 +36,7 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'placeholder' => 'email@domain.com',
                     'class' => 'btn'
-                ]
+                ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
@@ -60,7 +60,7 @@ class RegistrationFormType extends AbstractType
                     ],
                     'constraints' => [
                         new Assert\NotBlank([
-                            'message' => 'Please enter a password',
+                            'message' => 'Veuillez entrer un mot de passe',
                         ]),
                         new Assert\Regex([
                             'pattern' => '/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,}$/',

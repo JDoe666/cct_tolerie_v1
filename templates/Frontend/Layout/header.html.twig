@@ -52,6 +52,19 @@
 								<a href="{{ path('app_logout') }}">Déconnexion</a>
 							</li>
 						</ul>
+						{% if is_granted('ROLE_ADMIN') %}
+							<ul id="myDropdown2" class="dropdown-content">
+								<li class="item">
+									<a href="">Mon profil</a>
+								</li>
+								<li class="item">
+									<a href="{{path('admin_users_index')}}">Gestion</a>
+								</li>
+								<li class="item">
+									<a href="{{ path('app_logout') }}">Déconnexion</a>
+								</li>
+							</ul>
+						{% endif %}
 					{% endif %}
 				</ul>
 			{% else %}
