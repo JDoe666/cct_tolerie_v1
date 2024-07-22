@@ -35,9 +35,9 @@ class UserFormType extends AbstractType
                     'Admin' => 'ROLE_ADMIN',
                     'Super-Admin' => 'ROLE_SUPER_ADMIN',
                 ],
-                'multiple' => false,
+                'multiple' => true,
                 'expanded' => false,
-                'mapped' => false,
+                'autocomplete' => true,
                 'required' => true,
             ])
             ->add('firstname', TextType::class, [
