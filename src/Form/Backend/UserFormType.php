@@ -13,7 +13,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class UserFormType extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -24,21 +23,6 @@ class UserFormType extends AbstractType
                     'required' => true,
                     'autofocus' => true,
                 ],
-            ])
-            ->add('roles', ChoiceType::class, [
-                'label' => 'Rôle',
-                'attr' => [
-                    'class' => 'form-check',
-                ],
-                'choices' => [
-                    'Utilisateur' => 'ROLE_USER',
-                    'Admin' => 'ROLE_ADMIN',
-                    'Super-Admin' => 'ROLE_SUPER_ADMIN',
-                ],
-                'multiple' => true,
-                'expanded' => false,
-                'autocomplete' => true,
-                'required' => true,
             ])
             ->add('firstname', TextType::class, [
                 'label' => 'Prénom',
@@ -52,12 +36,31 @@ class UserFormType extends AbstractType
                     'placeholder' => 'Deschamps'
                 ]
             ]);
+
+        if ($options['isSuperAdmin']) {
+            $builder->add('roles', ChoiceType::class, [
+                'label' => 'Rôle',
+                'attr' => [
+                    'class' => 'form-check',
+                ],
+                'choices' => [
+                    'Utilisateur' => 'ROLE_USER',
+                    'Admin' => 'ROLE_ADMIN',
+                    'Super-Admin' => 'ROLE_SUPER_ADMIN',
+                ],
+                'multiple' => true,
+                'expanded' => false,
+                'autocomplete' => true,
+                'required' => true,
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'isSuperAdmin' => false,
         ]);
     }
 }

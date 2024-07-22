@@ -37,7 +37,7 @@ class UserController extends AbstractController
             $this->redirectToRoute('admin_users_index');
         }
 
-        $form = $this->createForm(UserFormType::class, $user);
+        $form = $this->createForm(UserFormType::class, $user, ['isSuperAdmin' => $this->isGranted('ROLE_SUPER_ADMIN')]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
