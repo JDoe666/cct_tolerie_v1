@@ -1,0 +1,34 @@
+.admin-sidebar {
+    width: 80%;
+    margin-top: 4rem;
+    background-color: $dark;
+    color: white;
+    border: solid 1px white;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 2rem;
+    &-content {
+        display:flex;
+        justify-content: space-between;
+        li {
+            width: 100%;
+            border: solid 1px white;
+            padding: 1rem;
+            transition: .2s;
+            cursor: pointer;
+            &:hover {
+                background-color: white;
+                border: solid 1px $dark;
+                a {
+                    color: $dark;
+                    font-weight:bold;
+                }
+            }
+            a {
+                color: white;
+                font-size: 20px;
+                
+            }
+        }
+    }
+}

@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\DateTimeTrait;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -11,8 +13,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[ORM\HasLifecycleCallbacks]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    use DateTimeTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -149,6 +154,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+    public function switchRoles(string $roles): static
+    {
+        $this->roles = [];
+        if ($roles === "ROLE_USER") {
+            $this->roles = [];
+        } else if ($roles === "ROLE_ADMIN") {
+            $this->roles = ["ROLE_ADMIN"];
+        } else if ($roles === "ROLE_SUPER_ADMIN") {
+            $this->roles = ["ROLE_SUPER_ADMIN", "ROLE_ADMIN"];
+        } else {
+            throw new Exception("Role invalide");
+        }
 
         return $this;
     }

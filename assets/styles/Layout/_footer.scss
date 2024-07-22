@@ -3,8 +3,11 @@
 
 footer {
     background-color: $dark;
-    margin-top: 4rem;
-    padding-top: 1rem;
+    padding-bottom:3rem;
+    padding-top:3rem;
+    width:100%;
+    position: relative;
+    bottom:0;
 }
 
 .footer-wrapper {
@@ -14,7 +17,6 @@ footer {
     // LEFT
 
     &-left-socials {
-        padding-bottom: 1rem;
         text-align:center;
         color: white;
         ul {
@@ -39,7 +41,6 @@ footer {
     // MIDDLE
 
     &-middle-contact {
-        padding-bottom: 1rem;
         margin-right: auto;
         margin-left: auto;
         h2 {
