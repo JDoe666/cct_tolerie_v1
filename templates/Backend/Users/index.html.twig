@@ -30,12 +30,14 @@
 						<td>{{user.lastname}}</td>
 						<td>{{user.email}}</td>
 						<td>
-						{% for role in user.roles %}
-							{{role}}
-						{% endfor %}
+							{% for role in user.roles %}
+								{{role}}
+							{% endfor %}
 						</td>
 						<td>{{user.isVerified}}</td>
-						<td><a href="{{path('admin_users_update', {id: user.id})}}">Modifier</a></td>
+						<td>
+							<a href="{{path('admin_users_update', {id: user.id})}}">Modifier</a>
+						</td>
 					</tr>
 				{% endfor %}
 			</tbody>
