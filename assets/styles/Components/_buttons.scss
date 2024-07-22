@@ -36,3 +36,22 @@
 .button-red:hover::after {
     border: solid 2px $yellow;
 }
+
+.button-delete {
+    padding: 0.6rem 1rem;
+    background-color: $red;
+    border:none;
+    color: $dark;
+    font-size:14px;
+    font-weight: 400;
+    cursor:pointer;
+}
+
+.button-update {
+    padding: 0.5rem 1rem;
+    background-color: $yellow;
+    border:none;
+    color: $dark;
+    font-size:14px;
+    font-weight: 400;
+}
