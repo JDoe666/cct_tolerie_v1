@@ -11,6 +11,10 @@
 		Administration des utilisateurs
 	</h2>
 	<section class="container">
+	<div class="container admin-filter">
+		<button class="admin-filter-button" data-controller="user-filter">Filtrer<i class="bi bi-filter"></i></button>
+		{% include 'Backend/Components/Filters/_UserFilter.html.twig' %}
+	</div>
 		<table class="admin-table">
 			<thead>
 				<tr>
@@ -35,7 +39,7 @@
 							{{role}}
 						{% endfor %}
 						</td>
-						<td>{{user.isVerified}}</td>
+						<td>{{ user.isVerified ? '1' : '0' }}</td>
 						<td>{{user.createdAt|date("d-m-Y")}}</td>
 						<td><a class="button-update" href="{{path('admin_users_update', {id: user.id})}}">Modifier</a></td>
 						<td>{% include 'Backend/Users/delete.html.twig' %}</td>

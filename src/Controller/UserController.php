@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Filtres\UserFilter;
 use App\Entity\User;
+use App\Form\Backend\Filtres\SearchUserType;
 use App\Form\Backend\UserFormType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,25 +15,35 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/admin/users', name:'admin_users', methods: ['GET', 'POST'])]
+#[Route('/admin/users', name: 'admin_users', methods: ['GET', 'POST'])]
 class UserController extends AbstractController
-{   
+{
     public function __construct(
         private UserRepository $userRepository,
         private EntityManagerInterface $em,
-    ){}
+    ) {
+    }
 
     #[Route('', name: '_index', methods: ['GET'])]
-    public function index(): Response
-    {   
+    public function index(Request $request): Response
+    {
+        $data = new UserFilter;
+
+        $form = $this->createForm(SearchUserType::class, $data);
+        $form->handleRequest($request);
+
+        $users = $this->userRepository->findUserData($data);
+
+
         return $this->render('Backend/Users/index.html.twig', [
-            'controller_name' => 'UserController',
-            'users' => $this->userRepository->findAll(),
+            'users' => $users,
+            'form' => $form,
         ]);
     }
 
-    #[Route('/{id}/update', name:'_update', methods: ['GET', 'POST'])]
-    public function update(Request $request, ?User $user) : Response|RedirectResponse {
+    #[Route('/{id}/update', name: '_update', methods: ['GET', 'POST'])]
+    public function update(Request $request, ?User $user): Response|RedirectResponse
+    {
         if (!$user) {
             $this->addFlash('error', 'Utilisateur introuvable');
 
@@ -51,7 +63,7 @@ class UserController extends AbstractController
             $this->em->flush();
 
             $this->addFlash('success', 'Utilisateur modifié avec succès !');
-            
+
             return $this->redirectToRoute('admin_users_index');
         }
 
@@ -59,7 +71,7 @@ class UserController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/{id}/delete', name:'_delete', methods:['POST'])]
+    #[Route('/{id}/delete', name: '_delete', methods: ['POST'])]
     public function delete(?User $user, Request $request): RedirectResponse
     {
         if (!$user) {

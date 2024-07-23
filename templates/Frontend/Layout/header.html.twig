@@ -40,7 +40,7 @@
 						<a href="#" class="dropButton">Mon compte<i class="bi bi-caret-down-square-fill"></i>
 						</a>
 					</li>
-					{% if app.user.isVerified == 1  %}
+					{% if app.user.isVerified %}
 						<ul id="myDropdown2" class="dropdown-content">
 							<li class="item">
 								<a href="">Mon profil</a>
@@ -52,7 +52,7 @@
 								<a href="{{ path('app_logout') }}">Déconnexion</a>
 							</li>
 						</ul>
-						{% if is_granted('ROLE_ADMIN') %}
+						{% if is_granted('ROLE_ADMIN')%}
 							<ul id="myDropdown2" class="dropdown-content">
 								<li class="item">
 									<a href="">Mon profil</a>

@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Filtres\UserFilter;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -33,6 +34,35 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $user->setPassword($newHashedPassword);
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
+    }
+
+    public function findUserData(UserFilter $search): array
+    {
+        $query = $this->createQueryBuilder('u')
+            ->select('u');
+
+        if (!empty($search->getQuery())) {
+            $query = $query->andWhere('u.firstname LIKE :query OR u.lastname LIKE :query OR u.email LIKE :query')
+                ->setParameter('query', "%{$search->getQuery()}%");
+        }
+        
+        if (!empty($search->getIsVerified())) {
+            $query = $query->andWhere('u.isVerified =:isVerified')
+                           ->setParameter('isVerified', true);
+        }
+        
+        if (!empty($search->getRoles())) {
+            if ($search->getRoles() === 'ROLE_USER') {
+                $query = $query->andWhere('u.roles LIKE :roles')
+                    ->setParameter('roles', "[]");
+            } else {
+                $query = $query->andWhere('u.roles LIKE :roles')
+                    ->setParameter('roles', "%{$search->getRoles()}%");
+            }
+        }
+
+        return $query->getQuery()
+            ->getResult();
     }
 
 
