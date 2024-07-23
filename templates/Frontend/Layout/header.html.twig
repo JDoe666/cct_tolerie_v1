@@ -49,7 +49,7 @@
 								<a href="">Mes devis</a>
 							</li>
 							<li class="item">
-								<a href="{{ path('app_logout') }}">Déconnexion</a>
+								<a href="{{ path('app_logout') }}" data-turbo="false">Déconnexion</a>
 							</li>
 						</ul>
 						{% if is_granted('ROLE_ADMIN')%}
@@ -61,7 +61,7 @@
 									<a href="{{path('admin_users_index')}}">Gestion</a>
 								</li>
 								<li class="item">
-									<a href="{{ path('app_logout') }}">Déconnexion</a>
+									<a href="{{ path('app_logout') }}" data-turbo="false">Déconnexion</a>
 								</li>
 							</ul>
 						{% endif %}

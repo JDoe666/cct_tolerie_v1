@@ -13,21 +13,20 @@ import { gsap, Power4 } from "gsap";
 export default class extends Controller {
   connect() {
     this.element.addEventListener("click", () => {
-      
-      let filterForm = document.querySelector(".form-filter");
-      filterForm.classList.toggle("active");
-      let paginationContent = document.querySelector(".dropdown-pagination");
-      if (paginationContent.classList.contains("active")) {
-      }
-      if (filterForm.classList.contains("active")) {
-        gsap.to(".form-filter", {
+      const dropdown = this.element.closest(".dropdown-pagination");
+      dropdown.classList.toggle("active");
+      const dropdownContent = dropdown.querySelector(
+        ".dropdown-pagination-content"
+      );
+      if (dropdown.classList.contains("active")) {
+        gsap.to(dropdownContent, {
           height: "auto",
           opacity: 1,
           overflow: "unset",
           ease: Power4.easeOut,
         });
       } else {
-        gsap.to(".form-filter", {
+        gsap.to(dropdownContent, {
           height: 0,
           opacity: 0,
           overflow: "hidden",

@@ -29,6 +29,9 @@ class UserController extends AbstractController
     {
         $data = new UserFilter;
 
+        $data->setPage($request->get('page', 1));
+        $data->setLimit($request->get('limit', 10));
+
         $form = $this->createForm(SearchUserType::class, $data);
         $form->handleRequest($request);
 

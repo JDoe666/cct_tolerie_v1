@@ -5,9 +5,9 @@ namespace App\Repository;
 use App\Entity\Filtres\UserFilter;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
@@ -17,8 +17,10 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    public function __construct(ManagerRegistry $registry)
-    {
+    public function __construct(
+        ManagerRegistry $registry,
+        private PaginatorInterface $paginator,
+    ) {
         parent::__construct($registry, User::class);
     }
 
@@ -36,7 +38,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
-    public function findUserData(UserFilter $search): array
+    public function findUserData(UserFilter $search): PaginationInterface
     {
         $query = $this->createQueryBuilder('u')
             ->select('u');
@@ -45,12 +47,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             $query = $query->andWhere('u.firstname LIKE :query OR u.lastname LIKE :query OR u.email LIKE :query')
                 ->setParameter('query', "%{$search->getQuery()}%");
         }
-        
+
         if (!empty($search->getIsVerified())) {
             $query = $query->andWhere('u.isVerified =:isVerified')
-                           ->setParameter('isVerified', true);
+                ->setParameter('isVerified', true);
         }
-        
+
         if (!empty($search->getRoles())) {
             if ($search->getRoles() === 'ROLE_USER') {
                 $query = $query->andWhere('u.roles LIKE :roles')
@@ -61,8 +63,11 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             }
         }
 
-        return $query->getQuery()
-            ->getResult();
+        return $this->paginator->paginate(
+            $query->getQuery(),
+            $search->getPage(),
+            $search->getLimit(),
+        );
     }
 
 
