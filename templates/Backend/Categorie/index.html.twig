@@ -1,10 +1,43 @@
 {% extends 'Backend/base.html.twig' %}
 
 {% block title %}
-    {{ parent() }}
-    Categories
+	{{ parent() }}
+	Categories
 {% endblock %}
 
 {% block body %}
-    <h1 class="text-center">Administration des catégories</h1>
+	<div class="container text-center">
+		<h1 class="text-center">Administration des catégories</h1>
+		<a href="{{ path('admin_categories_create') }}" class="button button-update">Créer une catégorie</a>
+	</div>
+	<div class="container wrapper-cards">
+		{% for categorie in categories %}
+			<div class="card-admin">
+				<div class="card-admin-header">
+					{% if categorie.imageName %}
+						<img src="{{ vich_uploader_asset(categorie)}}" alt="">
+					{% endif %}
+				</div>
+				<div class="card-admin-content">
+					<div class="card-admin-content-description">
+						<h3>Nom</h3>
+						<p>{{categorie.name}}</p>
+					</div>
+					<div class="card-admin-content-description">
+						<h3>Création</h3>
+						<p>{{categorie.createdAt|date("d-m-Y")}}</p>
+					</div>
+				</div>
+				<div class="card-admin-manage">
+					<div class="card-admin-manage-update">
+						<a href="{{ path('admin_categories_update', {slug: categorie.slug}) }}" class="button-card-update">Modifier</a>
+					</div>
+					<div></div>
+					<div class="card-admin-manage-delete">
+						{% include 'Backend/Categorie/delete.html.twig' %}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
 {% endblock %}

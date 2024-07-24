@@ -17,6 +17,20 @@
     border: solid 1px $yellow;
 }
 
+.vich-image {
+    .mb-3 {
+       display:none;
+    }
+    img {
+        width: 200px;
+        height:200px;
+        padding-top: 2rem;
+        margin-right: auto;
+        margin-left: auto;
+        display:block;
+    }
+}
+
 fieldset {
     border:none;
 }

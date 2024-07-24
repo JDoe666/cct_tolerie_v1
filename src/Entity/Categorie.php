@@ -25,12 +25,20 @@ class Categorie
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Length(max: 255, min: 3)]
+    #[Assert\Length(
+        max: 255,
+        min: 3,
+        minMessage: "Le nom doit contenir 3 caractères minimum.",
+        maxMessage: "Le nom doit contenir 255 caractères maximum."
+    )]
     #[Assert\NotBlank()]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Length(max: 255, min: 3)]
+    #[Assert\Length(
+        max: 255,
+        min: 3,
+    )]
     #[Gedmo\Slug(fields: ['name'])]
     private ?string $slug = null;
 
@@ -75,7 +83,7 @@ class Categorie
         return $this->imageName;
     }
 
-    public function setImageName(string $imageName): void
+    public function setImageName(?string $imageName): void
     {
         $this->imageName = $imageName;
     }
