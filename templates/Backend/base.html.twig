@@ -16,10 +16,10 @@
 		{% endblock %}
 	</head>
 	<body>
-		{% include 'Backend/Navigation/_adminNavigation.html.twig' %}
+	{% include 'Backend/Navigation/_adminNavigation.html.twig' %}
 		<main>
-			{% include 'Frontend/Layout/flash.html.twig' %}
-			{% block body %}{% endblock %}
+		{% include 'Frontend/Layout/flash.html.twig' %}
+		{% block body %}{% endblock %}
 		</main>
 	</body>
 </html>

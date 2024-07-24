@@ -10,11 +10,15 @@
 .form-width {
     margin-top: 2rem;
     margin-bottom:6rem;
-    width: 30%;
+    width: 50%;
     padding: 1rem;
     margin-left: auto;
     margin-right: auto;
     border: solid 1px $yellow;
+}
+
+fieldset {
+    border:none;
 }
 
 .mb-3 {
