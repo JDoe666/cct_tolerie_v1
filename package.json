@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "bootstrap-icons": "^1.11.3",
+        "gsap": "^3.12.5",
         "sass": "^1.77.8"
     }
 }

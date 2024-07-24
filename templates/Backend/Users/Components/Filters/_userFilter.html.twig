@@ -1,0 +1,19 @@
+{{ form_start(form, {'attr': {'class': 'form-filter card p-3'}}) }}
+<div class="container">
+	<div class="admin-filter-search">
+		<div>
+			<h3>Rechercher</h3>
+			{{ form_row(form.query) }}
+		</div>
+		<div>
+			<h3>Roles</h3>
+			{{ form_row(form.roles) }}
+		</div>
+        <div>
+			<h3>Email</h3>
+			{{ form_row(form.isVerified) }}
+		</div>
+	</div>
+    <button type="submit" class="button button-filter">Filtrer</button>
+</div>
+{{ form_end(form, {render_rest: false}) }}

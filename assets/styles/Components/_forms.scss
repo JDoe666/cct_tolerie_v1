@@ -69,3 +69,28 @@
     background-color: $red;
     transition: .3s;
 }
+
+.ts-dropdown {
+    background-color: #fff;
+}
+
+.ts-wrapper {
+    border: 1px solid $yellow;
+    cursor:pointer;
+    #user_form_roles-ts-control {
+        cursor:pointer;
+    }
+}
+
+.form-filter {
+    width:100%;
+    margin-right: auto;
+    margin-left: auto;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+
+    &.active {
+        pointer-events: all;
+    }
+}

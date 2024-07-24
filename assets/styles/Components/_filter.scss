@@ -1,0 +1,25 @@
+.admin-filter {
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom:1rem;
+    &-button {
+        background-color: white;
+        padding: 1rem;
+        border: solid 2px $dark;
+        width: 80%;
+        margin-right: auto;
+        margin-left: auto;
+        display:flex;
+        justify-content:space-between;
+        font-size: 16px;
+        cursor:pointer;
+    }
+    &-search {
+        width:100%;
+        display:grid;
+        grid-template-columns: 50% 40% 10%;
+        gap: 8px;
+        margin-top: 1rem;
+    }
+}
+

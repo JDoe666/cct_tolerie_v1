@@ -1,11 +1,11 @@
 <nav class="admin-sidebar">
     <ul class="admin-sidebar-content">
-        <li><a href="">Utilisateurs</a></li>
-        <li><a href="">Utilisateurs admin</a></li>
+        <li><a href="{{ path('admin_users_index') }}">Utilisateurs</a></li>
         <li><a href="">Catégories</a></li>
         <li><a href="">Réalisations</a></li>
         <li><a href="">Devis</a></li>
         <li><a href="">Avis clients</a></li>
         <li><a href="">Contacts clients</a></li>
+        <li><a href="{{ path('app_logout') }}" data-turbo="false">Deconnexion</a></li>
     </ul>
 </nav>
