@@ -59,7 +59,7 @@
 								{{role}}
 							{% endfor %}
 						</td>
-						<td>{{ user.isVerified ? '1' : '0' }}</td>
+						<td>{{ user.isVerified ? 'Oui' : 'Non' }}</td>
 						<td>{{user.createdAt|date("d-m-Y")}}</td>
 						<td>
 							<a class="button-update" href="{{path('admin_users_update', {id: user.id})}}">Modifier</a>
