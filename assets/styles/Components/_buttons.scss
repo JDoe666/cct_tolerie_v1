@@ -2,7 +2,7 @@
 
 .button {
     padding: 0.5rem 1rem;
-    width: 200px;
+    width: 40%;
     border:none;
     cursor: pointer;
 }
@@ -55,23 +55,21 @@
     font-weight: 400;
 }
 
-.button-filter {
-    padding: 0.5rem 1.5rem;
+.button-card-update {
+    padding: 0.4rem 0.8rem;
     background-color: $yellow;
-    border: solid 1px $dark;
+    border:none;
     color: $dark;
-    font-weight: 600;
-    margin-top: 12px;
-    display:block;
-    margin-right: auto;
-    margin-left: auto;
+    font-size:14px;
+    font-weight: 400;
 }
 
-.button-pages {
-    background-color: $dark;
-    padding: .5rem 1rem;
-    border:solid 1px white;
+.button-card-delete {
+    padding: 0.4rem 0.8rem;
+    background-color: $red;
+    color: $dark;
+    font-size:14px;
+    font-weight: 400;
     cursor:pointer;
-    color: white;
-    cursor:pointer;
+    border:none;
 }
