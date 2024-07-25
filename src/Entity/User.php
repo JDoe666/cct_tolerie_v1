@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Traits\DateTimeTrait;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -46,6 +48,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private bool $isVerified = false;
+
+    /**
+     * @var Collection<int, UserAddress>
+     */
+    #[ORM\ManyToMany(targetEntity: UserAddress::class, mappedBy: 'user')]
+    private Collection $userAddresses;
+
+    public function __construct()
+    {
+        $this->userAddresses = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -168,6 +181,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->roles = ["ROLE_SUPER_ADMIN", "ROLE_ADMIN"];
         } else {
             throw new Exception("Role invalide");
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserAddress>
+     */
+    public function getUserAddresses(): Collection
+    {
+        return $this->userAddresses;
+    }
+
+    public function addUserAddress(UserAddress $userAddress): static
+    {
+        if (!$this->userAddresses->contains($userAddress)) {
+            $this->userAddresses->add($userAddress);
+            $userAddress->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserAddress(UserAddress $userAddress): static
+    {
+        if ($this->userAddresses->removeElement($userAddress)) {
+            $userAddress->removeUser($this);
         }
 
         return $this;

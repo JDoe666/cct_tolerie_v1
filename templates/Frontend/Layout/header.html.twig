@@ -37,13 +37,13 @@
 			{% if (app.user) %}
 				<ul class="dropdown">
 					<li>
-						<a href="#" class="dropButton">Mon compte<i class="bi bi-caret-down-square-fill"></i>
+						<a href="{{ path('app_profile_index') }}" class="dropButton">Mon compte<i class="bi bi-caret-down-square-fill"></i>
 						</a>
 					</li>
 					{% if app.user.isVerified %}
 						<ul id="myDropdown2" class="dropdown-content">
 							<li class="item">
-								<a href="">Mon profil</a>
+								<a href="{{ path('app_profile_index') }}">Mon compte</a>
 							</li>
 							<li class="item">
 								<a href="">Mes devis</a>
@@ -55,7 +55,7 @@
 						{% if is_granted('ROLE_ADMIN')%}
 							<ul id="myDropdown2" class="dropdown-content">
 								<li class="item">
-									<a href="">Mon profil</a>
+									<a href="{{ path('app_profile_index') }}">Mon compte</a>
 								</li>
 								<li class="item">
 									<a href="{{path('admin_users_index')}}">Gestion</a>
