@@ -1,7 +1,5 @@
 .wrapper-cards {
     display:grid;
-    grid-template-columns: repeat(4, 24%);
-    margin-right: auto;
-    margin-left: auto;
-    gap: 1.2rem;
+    grid-template-columns: repeat(5, 19%);
+    gap: 1rem;
 }

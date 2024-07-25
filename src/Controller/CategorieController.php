@@ -3,13 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
+use App\Entity\Filtres\CategorieFilter;
 use App\Form\Backend\CategorieFormType;
+use App\Form\Backend\Filtres\SearchCategorieType;
 use App\Repository\CategorieRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin/categories', name: 'admin_categories')]
 class CategorieController extends AbstractController
@@ -20,13 +22,22 @@ class CategorieController extends AbstractController
     ) {
     }
 
-    #[Route('', name: '_index')]
-    public function index(): Response
+    #[Route('', name: '_index', methods:['GET'])]
+    public function index(Request $request): Response
     {
-        $categories = $this->categorieRepo->findAll();
+        $data = new CategorieFilter();
+
+        $data->setPage($request->get('page', 1));
+        $data->setLimit($request->get('limit', 10));
+
+        $form = $this->createForm(SearchCategorieType::class, $data);
+        $form->handleRequest($request);
+
+        $categories = $this->categorieRepo->findCategorieData($data);
 
         return $this->render('Backend/Categorie/index.html.twig', [
-            'categories' => $categories
+            'categories' => $categories,
+            'form' => $form,
         ]);
     }
 

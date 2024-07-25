@@ -3,19 +3,38 @@
 namespace App\Repository;
 
 use App\Entity\Categorie;
+use App\Entity\Filtres\CategorieFilter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @extends ServiceEntityRepository<Categorie>
  */
 class CategorieRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, private PaginatorInterface $paginator,)
     {
         parent::__construct($registry, Categorie::class);
     }
 
+    public function findCategorieData(CategorieFilter $search): PaginationInterface
+    {
+        $query = $this->createQueryBuilder('c')
+            ->select('c');
+
+        if (!empty($search->getQuery())) {
+            $query = $query->andWhere('c.name LIKE :query')
+                ->setParameter('query', "%{$search->getQuery()}%");
+        }
+
+        return $this->paginator->paginate(
+            $query->getQuery(),
+            $search->getPage(),
+            $search->getLimit(),
+        );
+    }
 //    /**
 //     * @return Categorie[] Returns an array of Categorie objects
 //     */
