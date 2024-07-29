@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}}
+	Profile
+{% endblock %}
+
+{% block body %}
+	<section class="container">
+		<div class="profile-wrapper">
+			<div>
+				{% include 'Frontend/Profile/Layout/_profileNavigation.html.twig' %}
+			</div>
+			<div>
+				<h1>Mes adresses</h1>
+				<p>Ici vous pouvez gérer vos adresses</p>
+				<div class="address-wrapper">
+					{% for address in user.userAddresses %}
+						<div class="address-card">
+							<div class="address-card-header">
+								<div>
+									<span>Adresse</span>
+									<p>{{ address.address }}</p>
+								</div>
+							</div>
+							<div class="address-card-content">
+								<div>
+									<span>Code postal</span>
+									<p>{{ address.zipCode }}</p>
+								</div>
+								<div>
+									<span>Ville</span>
+									<p>{{ address.city }}</p>
+								</div>
+							</div>
+							<div class="address-card-footer">
+									<a href="{{ path('app_profile_address_update', {id: address.id}) }}" class="button button-update">Modifier</a>
+									{% include 'Frontend/Profile/Address/delete.html.twig' %}
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				<a href="{{ path('app_profile_address_create') }}" class="button button-update">Ajouter une autre adresse</a>
+			</div>
+		</div>
+	</section>
+{% endblock %}

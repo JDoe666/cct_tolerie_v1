@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Backend;
 
 use App\Entity\Categorie;
 use App\Entity\Filtres\CategorieFilter;
@@ -67,7 +67,7 @@ class CategorieController extends AbstractController
     public function update(Request $request, Categorie $categorie): Response
     {
         if (!$categorie) {
-            $this->addFlash('error', 'Catégorie introuvable');
+            $this->addFlash('danger', 'Catégorie introuvable');
 
             $this->redirectToRoute('admin_categories_index');
         }
@@ -79,7 +79,7 @@ class CategorieController extends AbstractController
             $this->em->persist($categorie);
             $this->em->flush();
 
-            $this->addFlash('success', 'Catégorie crée avec succès !');
+            $this->addFlash('success', 'Catégorie modifiée avec succès !');
 
             return $this->redirectToRoute('admin_categories_index');
         }
@@ -92,9 +92,9 @@ class CategorieController extends AbstractController
     #[Route('/{id}/delete', name:'_delete', methods:['POST'])]
     public function delete(Request $request, Categorie $categorie): Response {
         if (!$categorie) {
-            $this->addFlash('error', 'Categorie introuvable');
+            $this->addFlash('danger', 'Categorie introuvable');
 
-            $this->redirectToRoute('admin_categorie_delete');
+           return $this->redirectToRoute('admin_categorie_delete');
         } 
 
         if ($this->isCsrfTokenValid('delete' . $categorie->getId(), $request->request->get('token'))) {
@@ -102,8 +102,10 @@ class CategorieController extends AbstractController
             $this->em->flush();
 
             $this->addFlash('success', 'Categorie supprimée avec succès !');
-
-            return $this->redirectToRoute('admin_categories_index');
+        } else {
+            $this->addFlash('danger', 'Token invalide');
         }
+
+        return $this->redirectToRoute('admin_categories_index');
     }
 }

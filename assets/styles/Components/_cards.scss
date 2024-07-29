@@ -23,3 +23,57 @@
         align-items:center;
     }
 }
+
+.profile-card {
+    margin-top: 1rem;
+    &-header {
+        p:first-child {
+            font-weight: bold;
+        }
+        p:last-child {
+            margin-bottom: .8rem;
+        }
+    }
+    &-content {
+        p:first-child {
+            font-weight: bold;
+        }
+        p:last-child {
+            margin-bottom: .8rem;
+            font-weight: bold;
+            margin-top: .8rem;
+        }
+    }
+    &-footer {
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+    }
+}
+
+.address-card {
+    margin-bottom: 2rem;
+    span {
+        font-weight: bold;
+        font-size:20px;
+    }
+    &-header {
+        margin-bottom: 1rem;
+    }
+    &-content {
+        div {
+            margin-bottom:1rem;
+        }
+    }
+    &-footer {
+        display:flex;
+        align-items:center;
+        gap: 0.3rem;
+        div {
+            width: 30%;
+        }
+    }
+}
+
+.address-card:not(:last-child) {
+    margin-right:2rem;
+}

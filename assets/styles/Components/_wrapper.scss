@@ -3,3 +3,16 @@
     grid-template-columns: repeat(5, 19%);
     gap: 1rem;
 }
+
+.profile-wrapper {
+    display:grid;
+    grid-template-columns: 25% 75%;
+    gap: 2rem;
+}
+
+.address-wrapper {
+    margin-top: 1rem;
+    display:grid;
+    grid-template-columns: 33% 33% 33%;
+    margin-bottom: 2rem;
+}
