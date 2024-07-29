@@ -5,6 +5,7 @@
     width: 40%;
     border:none;
     cursor: pointer;
+    border: solid 1px $dark;
 }
 
 .button-red {
@@ -37,39 +38,29 @@
 }
 
 .button-delete {
-    padding: 0.6rem 1rem;
     background-color: $red;
-    border:none;
     color: $dark;
     font-size:14px;
-    font-weight: 400;
     cursor:pointer;
 }
 
 .button-update {
-    padding: 0.5rem 1rem;
     background-color: $yellow;
-    border:none;
     color: $dark;
     font-size:14px;
-    font-weight: 400;
 }
 
 .button-card-update {
-    padding: 0.4rem 0.8rem;
     background-color: $yellow;
-    border:none;
-    color: $dark;
+    color: white;
     font-size:14px;
-    font-weight: 400;
 }
 
 .button-card-delete {
-    padding: 0.4rem 0.8rem;
+    width:100%;
+    padding: 0.6rem 1rem;
     background-color: $red;
     color: $dark;
     font-size:14px;
-    font-weight: 400;
     cursor:pointer;
-    border:none;
 }

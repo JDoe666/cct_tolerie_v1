@@ -29,6 +29,9 @@ body {
 
 main {
     margin-bottom:5rem;
+    & section:first-child:not(.no-space) {
+        margin-top:4rem;
+    }
 }
 
 li {
@@ -37,6 +40,11 @@ li {
 
 a {
     text-decoration:none;
+    font-weight: 600;
+}
+
+button {
+    font-weight:400;
 }
 
 #title {
