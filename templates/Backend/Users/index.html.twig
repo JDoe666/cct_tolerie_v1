@@ -1,0 +1,73 @@
+{% extends 'Backend/base.html.twig' %}
+
+{% block title %}
+	{{parent()}}
+	Utilisateurs
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center">
+		Administration des utilisateurs
+	</h1>
+	<section class="container">
+		<div class="dropdown-management">
+			<div class="container admin-filter">
+				<button class="admin-filter-button" data-controller="user-filter">Filtrer<i class="bi bi-filter-right"></i>
+				</button>
+				{% include 'Backend/Users/Components/Filters/_userFilter.html.twig' %}
+			</div>
+			<div class="container admin-pagination dropdown-pagination">
+				<button class="admin-filter-button" {{ stimulus_controller('user-pagination')}}>Trier /
+					{{ users.getTotalItemCount }}
+					{{ users.getTotalItemCount > 1 ? 'Utilisateurs' : 'User'}}<i class="bi bi-sort-alpha-down-alt"></i>
+				</button>
+				{% include 'Backend/Users/Components/Pagination/_userSortable.html.twig' %}
+			</div>
+		</div>
+		<div class="container-pages-management">
+			<div>
+				{{ knp_pagination_render(users) }}
+			</div>
+			<ul>
+				<li><a href="{{ path('admin_users_index', app.request.query.all|merge({limit: 10}) ) }}">10</a></li>
+				<li><a href="{{path('admin_users_index',app.request.query.all|merge({limit:25}))}}">25</a></li>
+				<li><a href="{{path('admin_users_index',app.request.query.all|merge({limit:50}))}}">50</a></li>
+				<li><a href="{{path('admin_users_index',app.request.query.all|merge({limit:100}))}}">100</a></li>
+			</ul>
+		</div>
+		<table class="admin-table">
+			<thead>
+				<tr>
+					<th scope="col">Prénom</th>
+					<th scope="col">Nom</th>
+					<th scope="col">Email</th>
+					<th scope="col">Roles</th>
+					<th scope="col">Vérifié</th>
+					<th scope="col">Crée le</th>
+					<th scope="col">Modifier</th>
+					<th scope="col">Supprimer</th>
+				</tr>
+			</thead>
+			<tbody class="admin-table-tbody">
+				{% for user in users %}
+					<tr>
+						<td>{{user.firstname}}</td>
+						<td>{{user.lastname}}</td>
+						<td>{{user.email}}</td>
+						<td>
+							{% for role in user.roles %}
+								{{role}}
+							{% endfor %}
+						</td>
+						<td>{{ user.isVerified ? 'Oui' : 'Non' }}</td>
+						<td>{{user.createdAt|date("d-m-Y")}}</td>
+						<td>
+							<a class="button button-update" href="{{path('admin_users_update', {id: user.id})}}">Modifier</a>
+						</td>
+						<td>{% include 'Backend/Users/delete.html.twig' %}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</section>
+{% endblock %}

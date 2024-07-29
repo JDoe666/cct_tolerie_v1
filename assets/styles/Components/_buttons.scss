@@ -1,0 +1,66 @@
+@import '../Abstracts/variables';
+
+.button {
+    padding: 0.5rem 1rem;
+    width: 40%;
+    border:none;
+    cursor: pointer;
+    border: solid 1px $dark;
+}
+
+.button-red {
+    background-color: $red;
+    color:white;
+    position:relative;
+    z-index: 1;
+    transition: .3s;
+}
+
+.button-red::after {
+    content: "";
+    border: solid 2px $red;
+    position:absolute;
+    top:0.150rem;
+    left:0.150rem;
+    width:100%;
+    height:100%;
+    z-index:0;
+    transition: .3s;
+}
+
+.button-red:hover {
+    background-color: $yellow;
+    color: $dark;
+}
+
+.button-red:hover::after {
+    border: solid 2px $yellow;
+}
+
+.button-delete {
+    background-color: $red;
+    color: $dark;
+    font-size:14px;
+    cursor:pointer;
+}
+
+.button-update {
+    background-color: $yellow;
+    color: $dark;
+    font-size:14px;
+}
+
+.button-card-update {
+    background-color: $yellow;
+    color: white;
+    font-size:14px;
+}
+
+.button-card-delete {
+    width:100%;
+    padding: 0.6rem 1rem;
+    background-color: $red;
+    color: $dark;
+    font-size:14px;
+    cursor:pointer;
+}

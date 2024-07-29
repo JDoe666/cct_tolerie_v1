@@ -1,0 +1,8 @@
+<div class="container admin-pagination-droppable dropdown-pagination-content">
+	<div class="admin-pagination-droppable-container-sort">
+		{{ knp_pagination_sortable(categories, 'Nom (descendant)', 'c.name', {'direction': 'DESC'}) }}
+	</div>
+	<div class="admin-pagination-droppable-container-sort">
+		{{ knp_pagination_sortable(categories, 'Date (descendant)', 'c.createdAt', {'direction': 'DESC'}) }}
+	</div>
+</div>

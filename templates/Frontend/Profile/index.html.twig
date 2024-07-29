@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}}
+	Profile
+{% endblock %}
+
+{% block body %}
+	<section class="container">
+		<div class="profile-wrapper">
+			<div>
+				{% include 'Frontend/Profile/Layout/_profileNavigation.html.twig' %}
+			</div>
+			<div>
+				<h1>Compte</h1>
+				<p>Ici vous pouvez modifier vos informations personnelles</p>
+				<div class="profile-card">
+					<div class="profile-card-header">
+						<p>Prénom et nom :</p>
+						<p>{{ user.firstname }}
+							{{ user.lastname }}</p>
+					</div>
+					<div class="profile-card-content">
+						<p>Adresse email :</p>
+						<p>{{ user.email }}</p>
+						<p class="text-{{ user.isVerified ? 'success' : 'danger' }}">{{ user.isVerified ? 'Vérifié' : 'Non vérifié'}}</p>
+					</div>
+					<div class="profile-card-footer">
+						<a href="" class="button button-update">Modifier</a>
+						<a href="" class="button button-update">Changer mon mot de passe</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

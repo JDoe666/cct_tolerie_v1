@@ -1,0 +1,13 @@
+{{ form_start(form, {'attr': {'class': 'form-filter'}}) }}
+<div class="container">
+	<div class="admin-filter-search">
+		<div>
+			<h3>Rechercher</h3>
+			{{ form_row(form.query) }}
+		</div>
+	</div>
+	<div class="container text-center">
+    	<button type="submit" class="button button-update text-center">Filtrer</button>
+	</div>
+</div>
+{{ form_end(form, {render_rest: false}) }}

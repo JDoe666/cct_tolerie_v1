@@ -1,0 +1,21 @@
+.admin-table {
+    min-width:400px;
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 5px 50px rgba(0,0,0,0.15);
+    border: solid 2px $dark;
+    thead tr{
+        background-color: $dark;
+        color: white;
+        text-align:left;
+    }
+    th, td {
+        padding:15px 20px;
+    }
+    tbody tr, td ,th {
+        border:solid 1px #ddd;
+    }
+    tbody tr:nth-child(even){
+        background-color: #f3f3f3;
+    }
+}
