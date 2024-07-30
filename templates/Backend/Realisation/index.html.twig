@@ -1,0 +1,73 @@
+{% extends 'Backend/base.html.twig' %}
+
+{% block title %}
+    {{parent()}}
+    Réalisations
+{% endblock %}
+
+{% block body %}
+    <section class="container">
+		<div class="container text-center">
+			<h1 class="text-center">Administration des réalisations</h1>
+			<a href="{{ path('admin_realisations_create') }}" class="button button-update">Créer une réalisation</a>
+		</div>
+		<div class="dropdown-management">
+			<div class="container admin-filter">
+				<button class="admin-filter-button" data-controller="user-filter">Filtrer<i class="bi bi-filter-right"></i>
+				</button>
+				{% include 'Backend/Realisation/Components/Filters/_realisationFilter.html.twig' %}
+			</div>
+			<div class="container admin-pagination dropdown-pagination">
+				<button class="admin-filter-button" {{ stimulus_controller('user-pagination')}}>Trier /
+					{{ realisations.getTotalItemCount }}
+					{{ realisations.getTotalItemCount > 1 ? 'Categories' : 'categories'}}<i class="bi bi-sort-alpha-down-alt"></i>
+				</button>
+				{% include 'Backend/Realisation/Components/Pagination/_realisationSortable.html.twig' %}
+			</div>
+		</div>
+		<div class="container-pages-management">
+			<div>
+				{{ knp_pagination_render(realisations) }}
+			</div>
+			<ul>
+				<li><a href="{{ path('admin_realisations_index', app.request.query.all|merge({limit: 10}) ) }}">10</a></li>
+				<li><a href="{{path('admin_realisations_index',app.request.query.all|merge({limit:25}))}}">25</a></li>
+				<li><a href="{{path('admin_realisations_index',app.request.query.all|merge({limit:50}))}}">50</a></li>
+				<li><a href="{{path('admin_realisations_index',app.request.query.all|merge({limit:100}))}}">100</a></li>
+			</ul>
+		</div>
+		<div class="container wrapper-cards">
+			{% for realisation in realisations %}
+				<div class="card-admin">
+					<div class="card-admin-header">
+						{% if realisation.imageName %}
+							<img src="{{ vich_uploader_asset(realisation)}}" alt="">
+						{% endif %}
+					</div>
+					<div class="card-admin-content">
+						<div class="card-admin-content-description">
+							<h3>Nom</h3>
+							<p>{{realisation.name}}</p>
+						</div>
+                        <div class="card-admin-content-description">
+							<h3>Description</h3>
+							<p>{{realisation.description}}</p>
+						</div>
+                        {# <div class="card-admin-content-description">
+							<h3>Catégorie</h3>
+							<p>{{realisation.categorie}}</p>
+						</div> #}
+						<div class="card-admin-content-description">
+							<h3>Création</h3>
+							<p>{{realisation.createdAt|date("d-m-Y")}}</p>
+						</div>
+					</div>
+					<div class="card-admin-manage">
+						<a href="{{ path('admin_realisations_update', {slug: realisation.slug}) }}" class="button button-update">Modifier</a>
+						{% include 'Backend/Realisation/delete.html.twig' %}
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</section>
+{% endblock %}
