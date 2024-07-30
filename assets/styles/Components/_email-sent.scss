@@ -1,0 +1,15 @@
+.email-sent {
+    &-content {
+        padding:2rem;
+        h1 {
+            margin-bottom: 2rem;
+            i {
+                color: rgba(14, 120, 14, 0.301);
+            }
+        }
+        width:40%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 2rem;
+    }
+}
