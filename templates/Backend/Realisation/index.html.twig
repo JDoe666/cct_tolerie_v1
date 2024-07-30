@@ -20,7 +20,7 @@
 			<div class="container admin-pagination dropdown-pagination">
 				<button class="admin-filter-button" {{ stimulus_controller('user-pagination')}}>Trier /
 					{{ realisations.getTotalItemCount }}
-					{{ realisations.getTotalItemCount > 1 ? 'Categories' : 'categories'}}<i class="bi bi-sort-alpha-down-alt"></i>
+					{{ realisations.getTotalItemCount > 1 ? 'Realisations' : 'realisations'}}<i class="bi bi-sort-alpha-down-alt"></i>
 				</button>
 				{% include 'Backend/Realisation/Components/Pagination/_realisationSortable.html.twig' %}
 			</div>
@@ -53,10 +53,10 @@
 							<h3>Description</h3>
 							<p>{{realisation.description}}</p>
 						</div>
-                        {# <div class="card-admin-content-description">
+                        <div class="card-admin-content-description">
 							<h3>Catégorie</h3>
 							<p>{{realisation.categorie}}</p>
-						</div> #}
+						</div>
 						<div class="card-admin-content-description">
 							<h3>Création</h3>
 							<p>{{realisation.createdAt|date("d-m-Y")}}</p>

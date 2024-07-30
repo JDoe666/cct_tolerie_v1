@@ -2,10 +2,12 @@
 
 namespace App\Entity\Filtres;
 
+use App\Entity\Categorie;
+
 class RealisationFilter {
     private ?string $query = '';
 
-    private ?string $categories = '';
+    private ?Categorie $categorie = null;
 
     private ?int $page = 1;
 
@@ -34,31 +36,7 @@ class RealisationFilter {
 
         return $this;
     }
-
-    /**
-     * Get the value of categories
-     *
-     * @return ?string
-     */
-    public function getCategories(): ?string
-    {
-        return $this->categories;
-    }
-
-    /**
-     * Set the value of categories
-     *
-     * @param ?string $categories
-     *
-     * @return self
-     */
-    public function setCategories(?string $categories): self
-    {
-        $this->categories = $categories;
-
-        return $this;
-    }
-
+    
     /**
      * Get the value of page
      *
@@ -103,6 +81,31 @@ class RealisationFilter {
     public function setLimit(?int $limit): self
     {
         $this->limit = $limit;
+
+        return $this;
+    }
+
+
+    /**
+     * Get the value of categorie
+     *
+     * @return ?Categorie
+     */
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    /**
+     * Set the value of categorie
+     *
+     * @param ?Categorie $categorie
+     *
+     * @return self
+     */
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }

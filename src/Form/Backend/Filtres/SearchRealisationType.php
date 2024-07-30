@@ -21,23 +21,20 @@ class SearchRealisationType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Rechercher'
                 ]
+                ])
+                ->add('categorie', EntityType::class, [
+                    'label' => false,
+                    'placeholder' => 'Choisir une catégorie',
+                    'class' => Categorie::class,
+                    'choice_label' => 'name',
+                    'expanded' => false,
+                    'multiple' => false,
+                    'autocomplete' => true,
+                    'attr' => [
+                        'class' => 'form-control',
+                    ],
+                    'required' => false,
                 ]);
-            // ->add('categories', EntityType::class, [
-            //     'label' => 'Catégorie',
-            //     'class' => Categorie::class,
-            //     'expanded' => false,
-            //     'multiple' => false,
-            //     'autocomplete' => true,
-            //     'attr' => [
-            //         'class' => 'form-control',
-            //     ],
-            //     'required' => false,
-            // ]);
-    }
-
-    public function getBlockPrefix(): string
-    {
-        return '';
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -47,5 +44,10 @@ class SearchRealisationType extends AbstractType
             'method' => 'GET',
             'csrf_protection' => false,
         ]);
+    }
+
+    public function getBlockPrefix(): string
+    {
+        return '';
     }
 }

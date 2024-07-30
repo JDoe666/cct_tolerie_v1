@@ -23,8 +23,10 @@ class RealisationController extends AbstractController
 
     #[Route('', name: '_index', methods: ['GET'])]
     public function index(Request $request): Response
-    {
-        $data = new RealisationFilter;
+    {   
+        // dd($request->query->get('categorie'));
+
+        $data = new RealisationFilter();
 
         $data->setPage($request->get('page', 1));
         $data->setLimit($request->get('limit', 10));
@@ -33,7 +35,6 @@ class RealisationController extends AbstractController
         $form->handleRequest($request);
 
         $realisations = $this->realisationRepository->findRealisationData($data);
-
 
         return $this->render('Backend/Realisation/index.html.twig', [
             'realisations' => $realisations,

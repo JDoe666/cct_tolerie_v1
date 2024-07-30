@@ -32,9 +32,9 @@ class RealisationRepository extends ServiceEntityRepository
                 ->setParameter('query', "%{$search->getQuery()}%");
         }
 
-        if (!empty($search->getCategories())) {
-            $query = $query->andWhere('r.categories =:categories')
-                ->setParameter('categories', true);
+        if (!empty($search->getCategorie())) {
+            $query = $query->andWhere('r.categorie =:categorie')
+                ->setParameter('categorie', $search->getCategorie());
         }
 
         return $this->paginator->paginate(
