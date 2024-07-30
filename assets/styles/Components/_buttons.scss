@@ -51,6 +51,17 @@
     border: solid 1px $dark;
 }
 
+.button-update-filter {
+    width:80%;
+    background-color: $yellow;
+    color: $dark;
+    font-size:14px;
+    border: solid 1px $dark;
+    margin-right: auto;
+    margin-left: auto;
+    display:block;
+}
+
 .button-card-update {
     background-color: $yellow;
     color: white;
