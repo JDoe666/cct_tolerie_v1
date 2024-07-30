@@ -2,10 +2,9 @@
 
 .button {
     padding: 0.5rem 1rem;
-    width: 40%;
     border:none;
     cursor: pointer;
-    border: solid 1px $dark;
+    line-height: 1.2rem;
 }
 
 .button-red {
@@ -42,25 +41,27 @@
     color: $dark;
     font-size:14px;
     cursor:pointer;
+    border: solid 1px $dark;
 }
 
 .button-update {
     background-color: $yellow;
     color: $dark;
     font-size:14px;
+    border: solid 1px $dark;
 }
 
 .button-card-update {
     background-color: $yellow;
     color: white;
     font-size:14px;
+    border: solid 1px $dark;
 }
 
 .button-card-delete {
-    width:100%;
-    padding: 0.6rem 1rem;
     background-color: $red;
     color: $dark;
     font-size:14px;
     cursor:pointer;
+    border: solid 1px $dark;
 }

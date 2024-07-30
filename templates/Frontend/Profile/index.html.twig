@@ -26,8 +26,8 @@
 						<p class="text-{{ user.isVerified ? 'success' : 'danger' }}">{{ user.isVerified ? 'Vérifié' : 'Non vérifié'}}</p>
 					</div>
 					<div class="profile-card-footer">
-						<a href="" class="button button-update">Modifier</a>
-						<a href="" class="button button-update">Changer mon mot de passe</a>
+						<a href="{{ path('app_profile_update', {id: user.id}) }}" class="button button-update">Modifier</a>
+						<a href="{{ path('app_forgot_password_request') }}" class="button button-update">Changer mon mot de passe</a>
 					</div>
 				</div>
 			</div>
