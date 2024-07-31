@@ -55,9 +55,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: UserAddress::class, mappedBy: 'user')]
     private Collection $userAddresses;
 
+    /**
+     * @var Collection<int, Devis>
+     */
+    #[ORM\OneToMany(targetEntity: Devis::class, mappedBy: 'user')]
+    private Collection $devis;
+
     public function __construct()
     {
         $this->userAddresses = new ArrayCollection();
+        $this->devis = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -208,6 +215,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->userAddresses->removeElement($userAddress)) {
             $userAddress->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Devis>
+     */
+    public function getDevis(): Collection
+    {
+        return $this->devis;
+    }
+
+    public function addDevi(Devis $devi): static
+    {
+        if (!$this->devis->contains($devi)) {
+            $this->devis->add($devi);
+            $devi->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDevi(Devis $devi): static
+    {
+        if ($this->devis->removeElement($devi)) {
+            // set the owning side to null (unless already changed)
+            if ($devi->getUser() === $this) {
+                $devi->setUser(null);
+            }
         }
 
         return $this;
