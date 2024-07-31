@@ -1,0 +1,35 @@
+{% extends 'Backend/base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	Créer
+{% endblock %}
+
+{% block body %}
+		<div class="container">
+			<h1 class="text-center">Créer une réalisation</h1>
+
+			{{ form_start(form, {attr: {class: 'form-width form-margin-bottom-admin' }}) }}
+
+			{{ form_errors(form) }}
+			<div class="form-group">
+				{{ form_row(form.name) }}
+			</div>
+            <div class="form-group">
+				{{ form_row(form.description) }}
+			</div>
+            <div class="form-group">
+				{{ form_row(form.categorie) }}
+			</div>
+			<div class="form-group">
+				{{ form_row(form.imageFile) }}
+			</div>
+			<div class="form-label-input text-center">
+				<button type="submit" class="button button-red">Créer</button>
+			</div>
+			{{ form_end(form) }}
+		</div>
+		<div class="form-label-input text-center">
+			<a href="{{ path('admin_realisations_index') }}" class="button button-red">Retour aux réalisations</a>
+		</div>
+{% endblock %}

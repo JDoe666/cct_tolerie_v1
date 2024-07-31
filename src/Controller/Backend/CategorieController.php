@@ -94,7 +94,7 @@ class CategorieController extends AbstractController
         if (!$categorie) {
             $this->addFlash('danger', 'Categorie introuvable');
 
-           return $this->redirectToRoute('admin_categorie_delete');
+           return $this->redirectToRoute('admin_categorie_index');
         } 
 
         if ($this->isCsrfTokenValid('delete' . $categorie->getId(), $request->request->get('token'))) {
