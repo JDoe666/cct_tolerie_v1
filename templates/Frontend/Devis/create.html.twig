@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{parent()}}
+    Demande devis
+{% endblock %}
+
+{% block body %}
+    <section class="container">
+			<h1 class="text-center">Demander un devis</h1>
+
+			{{ form_start(form, {attr: {class: 'form-width' }}) }}
+
+			{{ form_errors(form) }}
+			<div class="form-group">
+				{{ form_row(form.firstname) }}
+			</div>
+			<div class="form-group">
+				{{ form_row(form.lastname) }}
+			</div>
+            <div class="form-group">
+				{{ form_row(form.description) }}
+			</div>
+            <div class="form-group">
+				{{ form_row(form.devisImages) }}
+			</div>
+			<div class="form-label-input text-center">
+				<button type="submit" class="button button-red">Envoyer</button>
+			</div>
+			{{ form_end(form) }}
+		</section>
+{% endblock %}
