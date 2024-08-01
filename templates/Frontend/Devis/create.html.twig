@@ -9,7 +9,7 @@
     <section class="container">
 			<h1 class="text-center">Demander un devis</h1>
 
-			{{ form_start(form, {attr: {class: 'form-width' }}) }}
+			{{ form_start(form, {attr: {class: 'form-width', 'data-controller': 'addCollection' }}) }}
 
 			{{ form_errors(form) }}
 			<div class="form-group">
@@ -21,9 +21,19 @@
             <div class="form-group">
 				{{ form_row(form.description) }}
 			</div>
-            <div class="form-group">
-				{{ form_row(form.devisImages) }}
-			</div>
+            
+<button type="button" class="add_item_link button button-update" data-collection-holder-class="images">Ajouter une image</button>
+
+<ul class="images row" data-index="{{ form.devisImages|length > 0 ? form.devisImages|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.devisImages.vars.prototype)|e('html_attr') }}">
+	{% for image in form.devisImages %}
+		<li>
+			<button type="button" class="remove_item_link button button-delete">
+				<i class="bi bi-x-square-fill"></i>
+			</button>
+			{{ form_widget(image) }}
+		</li>
+	{% endfor %}
+</ul>
 			<div class="form-label-input text-center">
 				<button type="submit" class="button button-red">Envoyer</button>
 			</div>

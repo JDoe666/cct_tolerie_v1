@@ -11,8 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-use function PHPUnit\Framework\throwException;
-
 #[Route('/app/devis', name: 'app_devis')]
 class DevisController extends AbstractController
 {
@@ -32,15 +30,20 @@ class DevisController extends AbstractController
 
             return $this->redirectToRoute('app_login');
         }
-
+        /**
+         * @var User $user
+         */
         $devis = new Devis();
+        $devis->setFirstname($user->getFirstname());
+        $devis->setLastname($user->getLastname());
 
         $form = $this->createForm(UserDevisFormType::class, $devis);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($form);
+            $devis->setStatus(Devis::STATUS_WAITING);
+            $this->em->persist($devis);
             $this->em->flush();
 
             $this->addFlash('success', 'Nous avons bel et bien reçu votre devis, nous le traiterons dans les plus bref délais.');

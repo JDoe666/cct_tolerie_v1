@@ -3,6 +3,7 @@
 namespace App\Form\Frontend;
 
 use App\Entity\Devis;
+use App\Form\Frontend\UserDevisImageFormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;

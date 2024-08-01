@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: DevisRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Devis
 {
     use DateTimeTrait;
