@@ -55,6 +55,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: UserAddress::class, mappedBy: 'user')]
     private Collection $userAddresses;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Avis $avis = null;
+
     public function __construct()
     {
         $this->userAddresses = new ArrayCollection();
@@ -209,6 +212,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->userAddresses->removeElement($userAddress)) {
             $userAddress->removeUser($this);
         }
+
+        return $this;
+    }
+
+    public function getAvis(): ?Avis
+    {
+        return $this->avis;
+    }
+
+    public function setAvis(?Avis $avis): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($avis === null && $this->avis !== null) {
+            $this->avis->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($avis !== null && $avis->getUser() !== $this) {
+            $avis->setUser($this);
+        }
+
+        $this->avis = $avis;
 
         return $this;
     }
