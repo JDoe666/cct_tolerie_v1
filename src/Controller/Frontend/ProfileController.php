@@ -4,7 +4,10 @@ namespace App\Controller\Frontend;
 
 use App\Entity\User;
 use App\Form\Frontend\UserProfileFormType;
+use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mime\Address;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +18,9 @@ class ProfileController extends AbstractController
 {
     public function __construct(
         private EntityManagerInterface $em,
+        private EmailVerifier $emailVerifier,
     ) {
+        $this->emailVerifier = $emailVerifier;
     }
 
     #[Route('', name: '_index', methods: ['GET', 'POST'])]
@@ -26,9 +31,15 @@ class ProfileController extends AbstractController
          */
         $user = $this->getUser();
         if (!$user->isVerified()) {
-            $this->addFlash('danger', 'Vous n\'avez pas accès à cette page car vous n\'avez pas vérifié votre email.');
+            $this->addFlash('danger', 'Vous n\'avez pas accès à cette page car vous n\'avez pas vérifié votre email. Nous vous avons renvoyé un lien de vérification.');
 
-            // TODO Envoyer un nouveau mail de vérification pour que l'utilisateur vérifie son email.
+            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+                (new TemplatedEmail())
+                    ->from(new Address('anthony.koenig.testing@outlook.com', 'No-reply-cct-tolerie'))
+                    ->to($user->getEmail())
+                    ->subject('Please Confirm your Email')
+                    ->htmlTemplate('registration/confirmation_email.html.twig')
+            );
 
             return $this->redirectToRoute('app_app');
         }

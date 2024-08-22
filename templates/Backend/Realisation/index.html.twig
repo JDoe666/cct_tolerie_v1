@@ -40,25 +40,25 @@
 			{% for realisation in realisations %}
 				<div class="card-admin">
 					<div class="card-admin-header">
-						{% if realisation.imageName %}
+						{% if realisation.imageName|length > 0 %}
 							<img src="{{ vich_uploader_asset(realisation)}}" alt="">
 						{% endif %}
 					</div>
 					<div class="card-admin-content">
 						<div class="card-admin-content-description">
-							<h3>Nom</h3>
+							<p class="bold">Nom</p>
 							<p>{{realisation.name}}</p>
 						</div>
                         <div class="card-admin-content-description">
-							<h3>Description</h3>
+							<p class="bold">Description</p>
 							<p>{{realisation.description}}</p>
 						</div>
                         <div class="card-admin-content-description">
-							<h3>Catégorie</h3>
+							<p class="bold">Catégorie</p>
 							<p>{{realisation.categorie}}</p>
 						</div>
 						<div class="card-admin-content-description">
-							<h3>Création</h3>
+							<p class="bold">Création</p>
 							<p>{{realisation.createdAt|date("d-m-Y")}}</p>
 						</div>
 					</div>

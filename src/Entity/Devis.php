@@ -21,7 +21,7 @@ class Devis
     public const STATUS_FINISHED = 'Terminé';
     public const STATUS_CANCELED = 'Annulé';
     public const STATUS_DENIED = 'Refusé';
-    
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -59,7 +59,13 @@ class Devis
      * @var Collection<int, DevisImage>
      */
     #[ORM\OneToMany(targetEntity: DevisImage::class, mappedBy: 'Devis', orphanRemoval: true, cascade: ['persist', 'remove'])]
+    #[Assert\Count(min: 1, minMessage: 'Veuillez envoyer au minimum une image.')]
+    #[Assert\Valid]
     private Collection $devisImages;
+
+    #[ORM\ManyToOne(inversedBy: 'devis')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?UserAddress $address = null;
 
     public function __construct()
     {
@@ -169,6 +175,18 @@ class Devis
                 $devisImage->setDevis(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAddress(): ?UserAddress
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?UserAddress $address): static
+    {
+        $this->address = $address;
 
         return $this;
     }

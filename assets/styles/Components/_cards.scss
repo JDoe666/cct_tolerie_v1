@@ -12,16 +12,31 @@
     //     width: 100%;
     // }
     &-header {
+        overflow:hidden;
         img {
             width:100%;
             height:200px;
             object-fit: cover;
         }
     }
+    &-content-name {
+        display:flex;
+        flex-direction:column;
+    }
+    &-content-informations {
+        width:100%;
+        display:flex;
+        .left {
+            width:49%;
+        }
+        .right {
+            width:49%;
+        }
+    }
     &-content-description {
-        text-align: center;
         h3 {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            margin-top: 0.8rem;
         }
         p {
             margin-bottom: 0.5rem;

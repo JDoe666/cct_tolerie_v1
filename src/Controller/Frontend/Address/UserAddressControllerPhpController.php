@@ -40,9 +40,9 @@ class UserAddressControllerPhpController extends AbstractController
             $this->em->persist($userAddress);
             $this->em->flush();
 
-            $this->addFlash('success', 'Votre adresse a été crée !');
+            $this->addFlash('success', 'Nouvelle adresse renseignée !');
             
-            return $this->redirectToRoute('app_profile_index');
+            return $this->redirectToRoute('app_profile_address_index');
         }
 
         return $this->render('Frontend/Profile/Address/create.html.twig', [

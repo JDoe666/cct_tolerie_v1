@@ -23,6 +23,18 @@ class DevisImage
     private ?string $imageName = null;
 
     #[Vich\UploadableField(mapping: 'categories', fileNameProperty: 'imageName')]
+    #[Assert\Image(
+        detectCorrupted:true,
+        maxSize: '2M',
+        notReadableMessage:"Le fichier est corrompu et ne peut pas être lu.",
+        mimeTypesMessage: "Le fichier soumis n'est pas une image valide. Veuillez sélectionner un fichier image.",
+    )]
+    #[Assert\When(
+        expression: 'this.getId() == null',
+        constraints: [
+            new Assert\NotBlank(),
+        ]
+    )]
     private ?File $imageFile = null;
 
     #[ORM\ManyToOne(inversedBy: 'devisImages')]

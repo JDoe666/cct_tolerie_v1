@@ -9,11 +9,16 @@ export default class extends Controller {
 
         this.element.querySelectorAll('.remove_item_link')
             .forEach(btn => {
+                btn.classList.add('hello')
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
+                    btn.classList.remove('btn')
                     btn.parentNode.remove();
                 });
             })
+
+       const fieldset = this.element.querySelector('fieldset');
+        fieldset.remove();
 
     }
 
@@ -21,7 +26,7 @@ export default class extends Controller {
         const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
 
         const item = document.createElement('li');
-        item.classList.add('col-md-4');
+        item.classList.add('form-image-item');
 
         item.innerHTML = collectionHolder
             .dataset
@@ -40,7 +45,7 @@ export default class extends Controller {
 
     addTagFormDeleteLink(item) {
         const removeFormButton = document.createElement('button');
-        removeFormButton.innerHTML = '<i class="bi bi-x-square-fill"></i>';
+        removeFormButton.innerHTML = '<i class="bi bi-x-square-fill form-button-icon"></i>';
         removeFormButton.classList.add('btn', 'btn-danger')
 
         item.prepend(removeFormButton);
