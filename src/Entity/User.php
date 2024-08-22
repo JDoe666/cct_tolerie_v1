@@ -55,12 +55,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: UserAddress::class, mappedBy: 'user')]
     private Collection $userAddresses;
 
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Avis $avis = null;
+    /**
+     * @var Collection<int, Devis>
+     */
+    #[ORM\OneToMany(targetEntity: Devis::class, mappedBy: 'user')]
+    private Collection $devis;
 
     public function __construct()
     {
         $this->userAddresses = new ArrayCollection();
+        $this->devis = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -216,24 +220,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAvis(): ?Avis
+    /**
+     * @return Collection<int, Devis>
+     */
+    public function getDevis(): Collection
     {
-        return $this->avis;
+        return $this->devis;
     }
 
-    public function setAvis(?Avis $avis): static
+    public function addDevi(Devis $devi): static
     {
-        // unset the owning side of the relation if necessary
-        if ($avis === null && $this->avis !== null) {
-            $this->avis->setUser(null);
+        if (!$this->devis->contains($devi)) {
+            $this->devis->add($devi);
+            $devi->setUser($this);
         }
 
-        // set the owning side of the relation if necessary
-        if ($avis !== null && $avis->getUser() !== $this) {
-            $avis->setUser($this);
-        }
+        return $this;
+    }
 
-        $this->avis = $avis;
+    public function removeDevi(Devis $devi): static
+    {
+        if ($this->devis->removeElement($devi)) {
+            // set the owning side to null (unless already changed)
+            if ($devi->getUser() === $this) {
+                $devi->setUser(null);
+            }
+        }
 
         return $this;
     }
