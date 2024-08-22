@@ -24,8 +24,6 @@ class RealisationController extends AbstractController
     #[Route('', name: '_index', methods: ['GET'])]
     public function index(Request $request): Response
     {   
-        // dd($request->query->get('categorie'));
-
         $data = new RealisationFilter();
 
         $data->setPage($request->get('page', 1));
