@@ -14,6 +14,21 @@
     }
 }
 
+.wrapper-cards-3 {
+    display:grid;
+    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    @media screen and (min-width:960px) and (max-width:1280px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @media screen and (min-width:600px) and (max-width:960px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media screen and (max-width:600px) {
+        grid-template-columns: 1fr;
+    }
+}
+
 .profile-wrapper {
     display:grid;
     grid-template-columns: 25% 75%;

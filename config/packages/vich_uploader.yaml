@@ -1,5 +1,5 @@
 vich_uploader:
-    db_driver: orm
+  db_driver: orm
 
     mappings:
        categories:
@@ -16,6 +16,13 @@ vich_uploader:
            inject_on_load: false
            delete_on_update: true
            delete_on_remove: true
+       avis:
+           uri_prefix: /images/avis
+           upload_destination: "%kernel.project_dir%/public/images/avis"
+           namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+           inject_on_load: false
+           delete_on_update: true
+           delete_on_remove: true
 
-    metadata:
-        type: attribute
+  metadata:
+    type: attribute
