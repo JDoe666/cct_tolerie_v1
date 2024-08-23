@@ -74,6 +74,9 @@
 }
 
 .address-card {
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    padding:8px;
     margin-bottom: 2rem;
     span {
         font-weight: bold;
@@ -94,6 +97,15 @@
         div {
             width: 30%;
         }
+    }
+}
+
+.devis-card {
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    
+    &-content {
+        padding:8px;
     }
 }
 

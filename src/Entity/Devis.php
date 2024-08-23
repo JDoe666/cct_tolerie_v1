@@ -67,6 +67,10 @@ class Devis
     #[ORM\JoinColumn(nullable: false)]
     private ?UserAddress $address = null;
 
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
+    private ?string $name = null;
+
     public function __construct()
     {
         $this->devisImages = new ArrayCollection();
@@ -187,6 +191,18 @@ class Devis
     public function setAddress(?UserAddress $address): static
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
 
         return $this;
     }

@@ -74,6 +74,13 @@ class UserDevisFormType extends AbstractType
                     ],
                     'required' => true,
                 ])
+                ->add('name', TextType::class, [
+                    'label' => 'Titre',
+                    'required' => true,
+                    'attr' => [
+                        'placeholder' => 'Titre du devis',
+                    ]
+                ])
                 ->add('description', TextareaType::class, [
                     'label' => 'Description',
                     'required' => true,
