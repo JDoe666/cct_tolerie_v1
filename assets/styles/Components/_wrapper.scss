@@ -60,3 +60,42 @@
         grid-template-columns: 1fr;
     }
 }
+
+.swiper-button-prev, .swiper-button-next {
+    color:white;
+}
+
+.wrapper-devis-slider {
+    position:relative;
+
+    .button-next-devis {
+        right: -4rem;
+        position:absolute;
+        bottom:19rem;
+        font-size: 30px; /* Taille de l'icône */
+        color: black; /* Couleur de la flèche */
+        background-color: $yellow; /* Couleur de fond */
+        border-radius: 10px; /* Ajoute un peu d'arrondi si nécessaire */
+        padding: 6px; /* Espace entre l'icône et le bord du bouton */
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: .2s ease-in;
+        cursor:pointer;
+    }
+    .button-prev-devis {
+        left: -4rem;
+        position: absolute;
+        bottom:19rem;
+        font-size: 30px; /* Taille de l'icône */
+        color: black; /* Couleur de la flèche */
+        background-color: $yellow; /* Couleur de fond */
+        border-radius: 10px; /* Ajoute un peu d'arrondi si nécessaire */
+        padding: 6px; /* Espace entre l'icône et le bord du bouton */
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: .2s ease-in;
+        cursor:pointer;
+    }
+}

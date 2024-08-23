@@ -89,28 +89,32 @@
 										<p>{{devi.address.zipCode}}</p>
 										<p>{{devi.address.city}}</p>
 									</div>
-								</div>
-								<div class="right">
 									<div>
 										<p class="bold">Création</p>
 										<p>{{devi.createdAt|date("d-m-Y H:i:s")}}</p>
 									</div>
+								</div>
+								<div class="right">
 									<div>
 										<p class="bold">Status</p>
 										{% if devi.status == "En attente" %}
-											<p class="border-grey">{{devi.status}}</p>
+											<p class="border-grey border">{{devi.status}}</p>
 										{% elseif devi.status == "Accepté" %}
-											<p class="border-yellow">{{devi.status}}</p>
+											<p class="border-yellow border">{{devi.status}}</p>
 										{% elseif devi.status == "Terminé" %}
-											<p class="border-green">{{devi.status}}</p>
+											<p class="border-green border">{{devi.status}}</p>
 										{% elseif devi.status == "Annulé" %}
-											<p class="border-orange">{{devi.status}}</p>
-											{% else %}
-											<p class="border-red">{{devi.status}}</p>
+											<p class="border-orange border">{{devi.status}}</p>
+										{% else %}
+											<p class="border-red border">{{devi.status}}</p>
 										{% endif %}
 										<p>
 											<a href="{{ path('admin_devis_update', {id: devi.id}) }}" id="devis-btn" class="button button-update">Modifier</a>
 										</p>
+									</div>
+									<div>
+										<p class="bold">Titre</p>
+										<p>{{devi.name}}</p>
 									</div>
 									<div>
 										<p class="bold">Description</p>

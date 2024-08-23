@@ -95,6 +95,59 @@ class DevisController extends AbstractController
         ]);
     }
 
+    #[Route('/app/profile/devis', name: 'app_profile_devis_index', methods: ['GET', 'POST'])]
+    public function show(): Response {
+        /**
+         * @var User $user
+         */
+        $user = $this->getUser();
+
+        if (!$user) {
+            $this->addFlash('danger', 'Vous devez être connectés pour accéder à cette page.');
+
+            return $this->redirectToRoute('app_login');
+        }
+        
+        $devis = $user->getDevis();
+
+        if (!$devis) {
+            $this->addFlash('danger', 'Vous n\'avez pas effectué de demande de devis.');
+
+            return $this->redirectToRoute('app_devis_create');
+        }
+        
+        return $this->render('Frontend/Devis/index.html.twig', [
+            'devis' => $devis,
+        ]);
+    }
+
+    #[Route('app/devis/{id}/cancel', name:'app_devis_cancel', methods:['POST'])]
+    public function delete(Request $request, Devis $devis): Response {
+        if (!$devis) {
+            $this->addFlash('danger', 'Devis introuvable');
+
+           return $this->redirectToRoute('app_devis_index');
+        } 
+
+        if ($devis->getStatus() !== Devis::STATUS_WAITING) {
+            $this->addFlash('danger', 'Le devis ne peut pas être annulé');
+
+            return $this->redirectToRoute('app_devis_index');
+        }
+
+        if ($this->isCsrfTokenValid('delete' . $devis->getId(), $request->request->get('token'))) {
+            $devis->setStatus(Devis::STATUS_CANCELED);
+            $this->em->persist($devis);
+            $this->em->flush();
+
+            $this->addFlash('success', 'Devis annulé avec succès !');
+        } else {
+            $this->addFlash('danger', 'Token invalide');
+        }
+
+        return $this->redirectToRoute('app_profile_devis_index');
+    }
+
     #[Route('admin/devis', name: 'admin_devis_index', methods: ['GET', 'POST'])]
     public function index(Request $request): Response
     {
