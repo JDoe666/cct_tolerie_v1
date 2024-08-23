@@ -32,7 +32,7 @@ class DevisImage
     #[Assert\When(
         expression: 'this.getId() == null',
         constraints: [
-            new Assert\NotBlank(),
+            new Assert\NotBlank(message: 'L\'image ne peut pas être vide. Veuillez télécharger une image.'),
         ]
     )]
     private ?File $imageFile = null;

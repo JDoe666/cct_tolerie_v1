@@ -48,6 +48,12 @@ class Avis
     private ?string $imageName = null;
 
     #[Vich\UploadableField(mapping: 'avis', fileNameProperty: 'imageName')]
+    #[Assert\Image(
+        detectCorrupted:true,
+        maxSize: '2M',
+        notReadableMessage:"Le fichier est corrompu et ne peut pas être lu.",
+        mimeTypesMessage: "Le fichier soumis n'est pas une image valide. Veuillez sélectionner un fichier image.",
+    )]
     private ?File $imageFile = null;
 
     public function getId(): ?int
