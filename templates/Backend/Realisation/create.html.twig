@@ -25,11 +25,11 @@
 				{{ form_row(form.imageFile, {attr: {"data-controller": "previewImage"}}) }}
 			</div>
 			<div class="form-label-input text-center">
-				<button type="submit" class="button button-red">Créer</button>
+				<button type="submit" class="button button-update">Créer</button>
 			</div>
 			{{ form_end(form) }}
 		</div>
 		<div class="form-label-input text-center">
-			<a href="{{ path('admin_realisations_index') }}" class="button button-red">Retour aux réalisations</a>
+			<a href="{{ path('admin_realisations_index') }}" class="button button-return">Retour aux réalisations</a>
 		</div>
 {% endblock %}

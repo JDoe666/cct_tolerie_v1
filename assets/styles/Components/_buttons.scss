@@ -5,11 +5,13 @@
     border:none;
     cursor: pointer;
     line-height: 1.2rem;
+    font-size: 16px;
 }
 
 .button-red {
     background-color: $red;
-    color:white;
+    color:#fff;
+    font-weight:bold;
     position:relative;
     z-index: 1;
     transition: .3s;
@@ -37,25 +39,36 @@
 }
 
 .button-delete {
-    background-color: $red;
-    color: $dark;
-    font-size:14px;
+    background-color: $button-red;
+    height: 40px;
+    color: #ffffff;
+    font-weight:bold;
     cursor:pointer;
     border: solid 1px $dark;
+    transition: background-color 0.3s ease;
+}
+
+.button-delete:hover {
+    background-color: darken($button-red, 10%);
 }
 
 .button-update {
-    background-color: $yellow;
-    color: $dark;
-    font-size:14px;
+    background-color: $green;
+    color: #ffffff;
+    font-weight:bold;
     border: solid 1px $dark;
+    transition: background-color 0.3s ease;
+}
+
+.button-update:hover {
+    background-color: #218838;
 }
 
 .button-update-filter {
     width:80%;
     background-color: $yellow;
     color: $dark;
-    font-size:14px;
+    font-weight:bold;
     border: solid 1px $dark;
     margin-right: auto;
     margin-left: auto;
@@ -63,16 +76,39 @@
 }
 
 .button-card-update {
-    background-color: $yellow;
-    color: white;
-    font-size:14px;
+    background-color: $green;
+    color: #ffffff;
+    font-weight:bold;
     border: solid 1px $dark;
+    transition: background-color 0.3s ease;
+}
+
+.button-card-update:hover {
+    background-color: #218838;
 }
 
 .button-card-delete {
-    background-color: $red;
-    color: $dark;
-    font-size:14px;
+    background-color: $button-red;
+    font-weight: bold;
+    color: #ffffff;
     cursor:pointer;
     border: solid 1px $dark;
+    transition: background-color 0.3s ease;
+}
+
+.button-card-delete:hover {
+    background-color: darken($button-red, 10%);
+}
+
+.button-return {
+        background-color: #6c757d;
+        border:none;
+        font-weight: bold;
+        color:#fff;
+        font-size: 1rem;
+        cursor:pointer;
+        transition: background-color 0.3s ease;
+}
+.button-return:hover {
+    background-color: #5a6268;
 }

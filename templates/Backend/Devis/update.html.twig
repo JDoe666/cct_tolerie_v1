@@ -9,17 +9,17 @@
 		<div class="container">
 			<h1 class="text-center">Modifier un devis</h1>
 
-			{{ form_start(form, {attr: {class: 'form-width form-margin-bottom-admin', onsubmit:"return confirm('Êtes-vous sûr de vouloir changer le status de ce devis ? Un email sera envoyé au client lorsque le status du devis changera.')"  }}) }}
+			{{ form_start(form, {attr: {class: 'form-width form-margin-bottom-admin', 'data-controller': 'modal'}}) }}
 			{{ form_errors(form) }}
 			<div class="form-group">
 				{{ form_row(form.status) }}
 			</div>
 			<div class="form-label-input text-center">
-				<button type="submit" class="button button-red">Modifier</button>
+				<button type="submit" class="button button-update">Modifier</button>
 			</div>
 			{{ form_end(form) }}
 		</div>
 		<div class="form-label-input text-center">
-			<a href="{{ path('admin_devis_index') }}" class="button button-red">Retour aux devis</a>
+			<a href="{{ path('admin_devis_index') }}" class="button button-return">Retour aux devis</a>
 		</div>
 {% endblock %}
