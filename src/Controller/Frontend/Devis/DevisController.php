@@ -121,7 +121,7 @@ class DevisController extends AbstractController
         ]);
     }
 
-    #[Route('app/devis/{id}/delete', name:'app_devis_delete', methods:['POST'])]
+    #[Route('app/devis/{id}/cancel', name:'app_devis_cancel', methods:['POST'])]
     public function delete(Request $request, Devis $devis): Response {
         if (!$devis) {
             $this->addFlash('danger', 'Devis introuvable');
@@ -129,16 +129,23 @@ class DevisController extends AbstractController
            return $this->redirectToRoute('app_devis_index');
         } 
 
+        if ($devis->getStatus() !== Devis::STATUS_WAITING) {
+            $this->addFlash('danger', 'Le devis ne peut pas être annulé');
+
+            return $this->redirectToRoute('app_devis_index');
+        }
+
         if ($this->isCsrfTokenValid('delete' . $devis->getId(), $request->request->get('token'))) {
-            $this->em->remove($devis);
+            $devis->setStatus(Devis::STATUS_CANCELED);
+            $this->em->persist($devis);
             $this->em->flush();
 
-            $this->addFlash('success', 'Devis supprimée avec succès !');
+            $this->addFlash('success', 'Devis annulé avec succès !');
         } else {
             $this->addFlash('danger', 'Token invalide');
         }
 
-        return $this->redirectToRoute('admin_devis_index');
+        return $this->redirectToRoute('app_profile_devis_index');
     }
 
     #[Route('admin/devis', name: 'admin_devis_index', methods: ['GET', 'POST'])]
