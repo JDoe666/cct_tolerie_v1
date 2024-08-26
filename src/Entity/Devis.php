@@ -71,6 +71,9 @@ class Devis
     #[Assert\NotBlank()]
     private ?string $name = null;
 
+    #[ORM\Column(length: 30, nullable: true)]
+    private ?string $canceledBy = null;
+
     public function __construct()
     {
         $this->devisImages = new ArrayCollection();
@@ -203,6 +206,18 @@ class Devis
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getCanceledBy(): ?string
+    {
+        return $this->canceledBy;
+    }
+
+    public function setCanceledBy(?string $canceledBy): static
+    {
+        $this->canceledBy = $canceledBy;
 
         return $this;
     }

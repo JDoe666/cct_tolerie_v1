@@ -137,6 +137,7 @@ class DevisController extends AbstractController
 
         if ($this->isCsrfTokenValid('delete' . $devis->getId(), $request->request->get('token'))) {
             $devis->setStatus(Devis::STATUS_CANCELED);
+            $devis->setCanceledBy('user');
             $this->em->persist($devis);
             $this->em->flush();
 
@@ -178,6 +179,7 @@ class DevisController extends AbstractController
 
         $user = $this->getUser();
         $devis->setUser($user);
+        $oldStatus = $devis->getStatus();
 
         if (!$devis) {
             $this->addFlash('danger', "Devis introuvable.");
@@ -194,6 +196,10 @@ class DevisController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $newStatus = $devis->getStatus();
+
+            if ($newStatus === Devis::STATUS_CANCELED) {
+                $devis->setCanceledBy('admin');
+            }
 
             $this->em->persist($devis);
             $this->em->flush();

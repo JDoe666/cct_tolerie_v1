@@ -105,6 +105,7 @@
 											<p class="border-green border">{{devi.status}}</p>
 										{% elseif devi.status == "Annulé" %}
 											<p class="border-orange border">{{devi.status}}</p>
+											<p>Annulé par {{ devi.canceledBy == 'admin' ? 'un administrateur' : 'le client' }}</p>
 										{% else %}
 											<p class="border-red border">{{devi.status}}</p>
 										{% endif %}
