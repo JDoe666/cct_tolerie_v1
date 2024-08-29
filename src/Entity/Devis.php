@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Logs\DevisLogs;
 use App\Entity\Traits\DateTimeTrait;
 use App\Repository\DevisRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -71,9 +72,19 @@ class Devis
     #[Assert\NotBlank()]
     private ?string $name = null;
 
+    #[ORM\Column(length: 30, nullable: true)]
+    private ?string $canceledBy = null;
+
+    /**
+     * @var Collection<int, DevisLogs>
+     */
+    #[ORM\OneToMany(targetEntity: DevisLogs::class, mappedBy: 'Devis')]
+    private Collection $devisLogs;
+
     public function __construct()
     {
         $this->devisImages = new ArrayCollection();
+        $this->devisLogs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -203,6 +214,48 @@ class Devis
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getCanceledBy(): ?string
+    {
+        return $this->canceledBy;
+    }
+
+    public function setCanceledBy(?string $canceledBy): static
+    {
+        $this->canceledBy = $canceledBy;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DevisLogs>
+     */
+    public function getDevisLogs(): Collection
+    {
+        return $this->devisLogs;
+    }
+
+    public function addDevisLog(DevisLogs $devisLog): static
+    {
+        if (!$this->devisLogs->contains($devisLog)) {
+            $this->devisLogs->add($devisLog);
+            $devisLog->setDevis($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDevisLog(DevisLogs $devisLog): static
+    {
+        if ($this->devisLogs->removeElement($devisLog)) {
+            // set the owning side to null (unless already changed)
+            if ($devisLog->getDevis() === $this) {
+                $devisLog->setDevis(null);
+            }
+        }
 
         return $this;
     }

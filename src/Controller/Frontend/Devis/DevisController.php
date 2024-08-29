@@ -4,6 +4,7 @@ namespace App\Controller\Frontend\Devis;
 
 use App\Entity\Devis;
 use App\Entity\Filtres\DevisFilter;
+use App\Entity\Logs\DevisLogs;
 use App\Entity\User;
 use App\Form\Backend\Filtres\SearchDevisType;
 use App\Form\Frontend\UserDevisFormType;
@@ -137,6 +138,7 @@ class DevisController extends AbstractController
 
         if ($this->isCsrfTokenValid('delete' . $devis->getId(), $request->request->get('token'))) {
             $devis->setStatus(Devis::STATUS_CANCELED);
+            $devis->setCanceledBy('user');
             $this->em->persist($devis);
             $this->em->flush();
 
@@ -178,6 +180,7 @@ class DevisController extends AbstractController
 
         $user = $this->getUser();
         $devis->setUser($user);
+        $oldStatus = $devis->getStatus();
 
         if (!$devis) {
             $this->addFlash('danger', "Devis introuvable.");
@@ -193,9 +196,29 @@ class DevisController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $admin = $this->getUser();
             $newStatus = $devis->getStatus();
 
+            if ($newStatus === Devis::STATUS_CANCELED) {
+                $devis->setCanceledBy('admin');
+            }
+
             $this->em->persist($devis);
+            $this->em->flush();
+            
+            $log = new DevisLogs();
+            $log->setDevis($devis);
+            $log->setAdministration($admin);
+            $log->setAction('Modification');
+            $log->setCreatedAt(new \DateTimeImmutable());
+
+            $logDetails = [
+                'old_status' => $oldStatus,
+                'new_status' => $newStatus,
+            ];
+            $log->setDetails($logDetails);
+
+            $this->em->persist($log);
             $this->em->flush();
 
             if ($oldStatus !== $newStatus) {

@@ -5,17 +5,57 @@
     box-shadow: 0 5px 50px rgba(0,0,0,0.15);
     border: solid 2px $dark;
     thead tr{
-        background-color: $dark;
+        background-color: rgb(104, 104, 104);
         color: white;
         text-align:left;
     }
     th, td {
-        padding:15px 20px;
+        padding:8px 12px;
     }
     tbody tr, td ,th {
         border:solid 1px #ddd;
     }
+    
     tbody tr:nth-child(even){
         background-color: #f3f3f3;
     }
+}
+
+.table-log-modificated {
+    background-color: rgba(0, 128, 0, 0.252) !important;
+}
+
+.log-status-waiting {
+    padding: 8px 16px;
+    background-color: grey;
+    color:white;
+    border-radius: 4px;
+}
+
+.log-status-accepted {
+    padding: 8px 16px;
+    background-color:green;
+    color:white;
+    border-radius: 4px;
+}
+
+.log-status-finished {
+    padding: 8px 16px;
+    background-color: green;
+    color:white;
+    border-radius: 4px;
+}
+
+.log-status-avoided {
+    padding: 8px 16px;
+    background-color: red;
+    color:white;
+    border-radius: 4px;
+}
+
+.log-status-canceled {
+    padding: 8px 16px;
+    background-color: rgb(186, 186, 57);
+    color:white;
+    border-radius: 4px;
 }
