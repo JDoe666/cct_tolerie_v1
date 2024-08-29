@@ -4,6 +4,7 @@ namespace App\Controller\Frontend\Devis;
 
 use App\Entity\Devis;
 use App\Entity\Filtres\DevisFilter;
+use App\Entity\Logs\DevisLogs;
 use App\Entity\User;
 use App\Form\Backend\Filtres\SearchDevisType;
 use App\Form\Frontend\UserDevisFormType;
@@ -195,6 +196,7 @@ class DevisController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $admin = $this->getUser();
             $newStatus = $devis->getStatus();
 
             if ($newStatus === Devis::STATUS_CANCELED) {
@@ -202,6 +204,21 @@ class DevisController extends AbstractController
             }
 
             $this->em->persist($devis);
+            $this->em->flush();
+            
+            $log = new DevisLogs();
+            $log->setDevis($devis);
+            $log->setAdministration($admin);
+            $log->setAction('Modification');
+            $log->setCreatedAt(new \DateTimeImmutable());
+
+            $logDetails = [
+                'old_status' => $oldStatus,
+                'new_status' => $newStatus,
+            ];
+            $log->setDetails($logDetails);
+
+            $this->em->persist($log);
             $this->em->flush();
 
             if ($oldStatus !== $newStatus) {

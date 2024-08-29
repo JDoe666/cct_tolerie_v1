@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Logs\DevisLogs;
 use App\Entity\Traits\DateTimeTrait;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -61,10 +62,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Devis::class, mappedBy: 'user')]
     private Collection $devis;
 
+    /**
+     * @var Collection<int, DevisLogs>
+     */
+    #[ORM\OneToMany(targetEntity: DevisLogs::class, mappedBy: 'administration')]
+    private Collection $devisLogs;
+
     public function __construct()
     {
         $this->userAddresses = new ArrayCollection();
         $this->devis = new ArrayCollection();
+        $this->devisLogs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -244,6 +252,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($devi->getUser() === $this) {
                 $devi->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DevisLogs>
+     */
+    public function getDevisLogs(): Collection
+    {
+        return $this->devisLogs;
+    }
+
+    public function addDevisLog(DevisLogs $devisLog): static
+    {
+        if (!$this->devisLogs->contains($devisLog)) {
+            $this->devisLogs->add($devisLog);
+            $devisLog->setAdministration($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDevisLog(DevisLogs $devisLog): static
+    {
+        if ($this->devisLogs->removeElement($devisLog)) {
+            // set the owning side to null (unless already changed)
+            if ($devisLog->getAdministration() === $this) {
+                $devisLog->setAdministration(null);
             }
         }
 
