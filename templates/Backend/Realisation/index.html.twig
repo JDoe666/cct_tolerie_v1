@@ -1,12 +1,12 @@
 {% extends 'Backend/base.html.twig' %}
 
 {% block title %}
-    {{parent()}}
-    Réalisations
+	{{parent()}}
+	Réalisations
 {% endblock %}
 
 {% block body %}
-    <section class="container">
+	<section class="container">
 		<div class="container text-center">
 			<h1 class="text-center">Administration des réalisations</h1>
 			<a href="{{ path('admin_realisations_create') }}" class="button button-update">Créer une réalisation</a>
@@ -30,10 +30,10 @@
 				{{ knp_pagination_render(realisations) }}
 			</div>
 			<ul>
-				<li><a href="{{ path('admin_realisations_index', app.request.query.all|merge({limit: 10}) ) }}">10</a></li>
-				<li><a href="{{path('admin_realisations_index',app.request.query.all|merge({limit:25}))}}">25</a></li>
-				<li><a href="{{path('admin_realisations_index',app.request.query.all|merge({limit:50}))}}">50</a></li>
-				<li><a href="{{path('admin_realisations_index',app.request.query.all|merge({limit:100}))}}">100</a></li>
+				<li><ahref="{{ path('admin_realisations_index', app.request.query.all|merge({limit: 10}) ) }}">10</ahref=></li>
+				<li><ahref="{{path('admin_realisations_index',app.request.query.all|merge({limit:25}))}}">25</ahref=></li>
+				<li><ahref="{{path('admin_realisations_index',app.request.query.all|merge({limit:50}))}}">50</ahref=></li>
+				<li><ahref="{{path('admin_realisations_index',app.request.query.all|merge({limit:100}))}}">100</ahref=></li>
 			</ul>
 		</div>
 		<div class="container wrapper-cards">
@@ -46,14 +46,18 @@
 					</div>
 					<div class="card-admin-content">
 						<div class="card-admin-content-description">
+							<p class="bold">Auteur</p>
+							<p>{{realisation.user.email}}</p>
+						</div>
+						<div class="card-admin-content-description">
 							<p class="bold">Nom</p>
 							<p>{{realisation.name}}</p>
 						</div>
-                        <div class="card-admin-content-description">
+						<div class="card-admin-content-description">
 							<p class="bold">Description</p>
 							<p>{{realisation.description}}</p>
 						</div>
-                        <div class="card-admin-content-description">
+						<div class="card-admin-content-description">
 							<p class="bold">Catégorie</p>
 							<p>{{realisation.categorie}}</p>
 						</div>

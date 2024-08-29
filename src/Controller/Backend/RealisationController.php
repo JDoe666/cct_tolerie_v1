@@ -43,7 +43,17 @@ class RealisationController extends AbstractController
     #[Route('/create', name: '_create', methods: ['GET', 'POST'])]
     public function create(Request $request): Response
     {
+        $user = $this->getUser();
         $realisation = new Realisation();
+
+        $realisation->setUser($user);
+        
+
+        if (!$user) {
+            $this->addFlash('danger', 'Vous devez être connecté pour créer une réalisation');
+
+            return $this->redirectToRoute('app_login');
+        }
 
         $form = $this->createForm(RealisationFormType::class, $realisation);
         $form->handleRequest($request);

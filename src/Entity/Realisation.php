@@ -54,6 +54,10 @@ class Realisation
     #[Vich\UploadableField(mapping: 'categories', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
 
+    #[ORM\ManyToOne(inversedBy: 'realisations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -155,5 +159,17 @@ class Realisation
         if (null !== $imageFile) {
             $this->updatedAt = new \DateTimeImmutable();
         }
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

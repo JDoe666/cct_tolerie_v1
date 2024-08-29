@@ -57,6 +57,10 @@ class Categorie
     #[ORM\OneToMany(targetEntity: Realisation::class, mappedBy: 'categorie')]
     private Collection $realisations;
 
+    #[ORM\ManyToOne(inversedBy: 'categories')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->realisations = new ArrayCollection();
@@ -159,5 +163,17 @@ class Categorie
 
     public function __toString(): string {
         return $this->name;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }
