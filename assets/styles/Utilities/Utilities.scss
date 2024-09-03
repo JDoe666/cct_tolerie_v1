@@ -76,3 +76,23 @@
     margin-right: auto;
     margin-left: auto;
 }
+
+.mt-4 {
+    margin-top: 5rem;
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
+}
+
+.bg-dark {
+    background-color: $dark;
+    color: white;
+    padding: 8px 1rem;
+    display:inline-block;
+    margin-bottom: 1rem;
+}

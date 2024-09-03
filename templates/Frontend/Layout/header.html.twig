@@ -1,17 +1,13 @@
 <header>
 	{% include 'Frontend/Layout/_logo.html.twig' %}
-	<nav>
+	<nav class="header-navbar">
 		<ul class="menu">
 			<li class="item">
-				<a class="link" href="">Accueil</a>
-			</li>
-			<li class="item">
-				<a class="link" href="">L'entreprise</a>
+				<a class="link" href="{{path('app_app')}}">Accueil</a>
 			</li>
 			<ul class="dropdown">
-				<li>
-					<a href="#" class="dropButton">Réalisations<i class="bi bi-caret-down-square-fill"></i>
-					</a>
+				<li class="dropButton">
+					Réalisations<i class="bi bi-caret-down-square-fill"></i>
 				</li>
 				<ul id="myDropdown" class="dropdown-content">
 					<li>
@@ -32,13 +28,15 @@
 					<li>
 						<a href="#">Professionnel</a>
 					</li>
+					<li>
+						<a href="#">Toutes les catégories</a>
+					</li>
 				</ul>
 			</ul>
 			{% if (app.user) %}
 				<ul class="dropdown">
-					<li>
-						<a href="{{ path('app_profile_index') }}" class="dropButton">Mon compte<i class="bi bi-caret-down-square-fill"></i>
-						</a>
+					<li class="dropButton">
+						Mon compte<i class="bi bi-caret-down-square-fill"></i>
 					</li>
 					{% if app.user.isVerified %}
 						<ul id="myDropdown2" class="dropdown-content">
@@ -72,6 +70,9 @@
 					<a href="{{ path('app_login') }}" class="link">Se connecter</a>
 				</li>
 			{% endif %}
+			<li class="item">
+				<a class="button button-red-header" href="{{path('app_devis_create')}}">Demander un devis</a>
+			</li>
 		</ul>
 	</nav>
 </header>

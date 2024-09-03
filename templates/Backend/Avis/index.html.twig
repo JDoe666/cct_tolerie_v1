@@ -7,42 +7,9 @@
 
 {% block body %}
 	<section class="container">
-		<div class="container text-center">
-			<h1 class="text-center">Administration des avis</h1>
-		</div>
-		<div class="dropdown-management">
-			<div class="container admin-filter">
-				<button class="admin-filter-button" data-controller="user-filter">Filtrer<i class="bi bi-filter-right"></i>
-				</button>
-				{% include 'Backend/Avis/Components/Filters/_avisFilter.html.twig' %}
-			</div>
-			<div class="container admin-pagination dropdown-pagination">
-				<button class="admin-filter-button" {{ stimulus_controller('user-pagination')}}>Trier /
-					{{ avis.getTotalItemCount }}
-					{{ avis.getTotalItemCount > 1 ? 'Avis' : 'avis'}}<i class="bi bi-sort-alpha-down-alt"></i>
-				</button>
-				{% include 'Backend/Avis/Components/Pagination/_avisSortable.html.twig' %}
-			</div>
-		</div>
-		<div class="container-pages-management">
-			<div>
-				{{ knp_pagination_render(avis) }}
-			</div>
-			<ul>
-				<li><a href="{{ path('admin_avis_index', app.request.query.all|merge({limit: 10}) ) }}">10</a></li>
-				<li><a href="{{path('admin_avis_index',app.request.query.all|merge({limit:25}))}}">25</a></li>
-				<li><a href="{{path('admin_avis_index',app.request.query.all|merge({limit:50}))}}">50</a></li>
-				<li><a href="{{path('admin_avis_index',app.request.query.all|merge({limit:100}))}}">100</a></li>
-			</ul>
-		</div>
 		<div class="container wrapper-cards-3">
 			{% for avi in avis %}
 				<div class="card-admin">
-					<div class="card-admin-header">
-						{% if avi.imageName %}
-							<img src="{{ vich_uploader_asset(avi)}}" alt="">
-						{% endif %}
-					</div>
 					<div class="card-admin-content">
 						<div class="card-admin-content-description">
 							<h3>Prénom</h3>

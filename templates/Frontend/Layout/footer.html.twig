@@ -1,78 +1,83 @@
 <footer>
-	<section class="footer-wrapper">
-		<div class="footer-wrapper-left-socials">
-			<h2>Suivez nous sur les réseaux sociaux !</h2>
-			<ul>
-				<li>
-					<a href="https://www.facebook.com/cctolerie/">
-						<i class="bi bi-facebook"></i>
-					</a>
-				</li>
-				<li>
-					<a href="https://fr.linkedin.com/company/cct-tolerie-home-design">
-						<i class="bi bi-linkedin"></i>
-					</a>
-				</li>
-				<li>
-					<a href="https://www.instagram.com/cctolerie_homedesign?igsh=MW1yMXFjZDVibXg0Yw==">
-						<i class="bi bi-instagram"></i>
-					</a>
-				</li>
-			</ul>
-			<ul class="footer-wrapper-left-socials-navigation menu">
-				<li class="item">
-					<a class="link" href="#">L'entreprise</a>
-				</li>
-				{% if (app.user) %}
-					<li class="item">
-						<a class="link" href="#">Mon compte</a>
-					</li>
-					{% else %}
-					<li class="item">
-						<a class="link" href="{{path ('app_login')}}">Se connecter</a>
-					</li>
-				{% endif %}
-				<li class="item">
-					<a class="link" href="#">Réalisations</a>
-				</li>
-				<li class="item">
-					<a class="link" href="{{path ('app_devis_create')}}">Devis</a>
-				</li>
-			</ul>
-
-		</div>
-		<div class="footer-wrapper-middle-contact">
+	<div class="flex justify-between container">
+		<div class="large-4 medium-6 small-12">
 			<h2>Nous trouver</h2>
-			<div class="footer-wrapper-middle-contact-content">
-				<div class="footer-wrapper-middle-contact-content-icon">
+			<div class="flex align-center">
+				<div class="footer-icons">
 					<i class="bi bi-geo-alt-fill"></i>
 				</div>
-				<div class="footer-wrapper-middle-contact-content-infos">
+				<div>
 					<p>95 impasse des entreprises</p>
 					<p>42740 SAINT-PAUL-EN-JAREZ</p>
 				</div>
 			</div>
-			<div class="footer-wrapper-middle-contact-content">
-				<div class="footer-wrapper-middle-contact-content-icon">
+			<div class="flex align-center">
+				<div class="footer-icons">
 					<i class="bi bi-telephone-fill"></i>
 				</div>
-				<div class="footer-wrapper-middle-contact-content-infos">
-					<p>95 impasse des entreprises</p>
-					<p>42740 SAINT-PAUL-EN-JAREZ</p>
+				<div>
+					<p>Tél :
+						<a href="phone" class="link-red">04 77 29 19 67</a>
+					</p>
+					<p>Fax :
+						<a href="fax" class="link-red">04 77 22 93 36</a>
+					</p>
 				</div>
 			</div>
-			<div class="footer-wrapper-middle-contact-content">
-				<div class="footer-wrapper-middle-contact-content-icon">
+			<div class="flex align-center">
+				<div class="footer-icons">
 					<i class="bi bi-envelope-fill"></i>
 				</div>
-				<div class="footer-wrapper-middle-contact-content-infos">
-					<p>95 impasse des entreprises</p>
-					<p>42740 SAINT-PAUL-EN-JAREZ</p>
+				<div>
+					<p>Email :
+						<a href="email" class="link-red">contact@cctolerie.fr</a>
+					</p>
 				</div>
 			</div>
 		</div>
-		<div class="footer-wrapper-right-map">
-			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2797.0439188976247!2d4.566244576653908!3d45.48906033177897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f5018ae37afd0d%3A0x3782ce68ffc4ddee!2s95%20Imp.%20des%20Entreprises%2C%2042740%20Saint-Paul-en-Jarez!5e0!3m2!1sfr!2sfr!4v1720079854558!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+		<div class="large-4 medium-6 small-12">
+			<h2>Horaires</h2>
+			<p>Ouvert du lundi au jeudi de 8h à 12h30 et de 13h à 17h</p>
+			<p>Le vendredi de 8h à 12h30 et de 13h à 16h</p>
+			<p class="mt-2">Fermé le week-end</p>
 		</div>
-	</section>
+		<div class="large-4 medium-6 small-12">
+			<div>
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2797.0439188976247!2d4.566244576653908!3d45.48906033177897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f5018ae37afd0d%3A0x3782ce68ffc4ddee!2s95%20Imp.%20des%20Entreprises%2C%2042740%20Saint-Paul-en-Jarez!5e0!3m2!1sfr!2sfr!4v1720079854558!5m2!1sfr!2sfr" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+			</div>
+		</div>
+		<div class="large-4 medium-6 small-12 mt-4">
+			<h2>Plan du site</h2>
+			<div class="flex">
+				<div class="large-6 medium-6 small-6">
+					<ul>
+						<li><a href="{{path('app_app')}}">Accueil</a></li>
+						<li><a href="{{path('app_devis_create')}}">Demander un devis</a></li>
+						<li><a href="#">Nos réalisations</a></li>
+						<li><a href="{{path('app_register')}}">Créer un compte</a></li>
+						<li><a href="{{path('app_login')}}">Se connecter</a></li>
+					</ul>
+				</div>
+				<div class="large-6 medium-6 small-6">
+					<ul>
+						<li><a href="#">Escaliers</a></li>
+						<li><a href="#">Cuisines</a></li>
+						<li><a href="#">Garde-corps</a></li>
+						<li><a href="#">Métallerie</a></li>
+						<li><a href="#">Mobilier</a></li>
+						<li><a href="#">Professionnel</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="large-8 medium-8 small-12 mt-4">
+			<h2>Suivez nous sur nos réseaux sociaux</h2>
+			<div class="flex">
+				<a href=""><img src="{{asset('images/footer/Facebook.png')}}" alt=""></a>
+				<a href=""><img src="{{asset('images/footer/Instagram.png')}}" alt=""></a>
+				<a href=""><img src="{{asset('images/footer/LinkedIn.png')}}" alt=""></a>
+			</div>
+		</div>
+	</div>
+
 </footer>

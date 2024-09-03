@@ -40,21 +40,9 @@ class Avis
     #[Assert\NotBlank()]
     private ?int $note = null;
 
-    #[ORM\OneToOne(inversedBy: 'avis', cascade: ['persist'])]
+    #[ORM\OneToOne(inversedBy: 'avis', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\Length(max: 255)]
-    private ?string $imageName = null;
-
-    #[Vich\UploadableField(mapping: 'avis', fileNameProperty: 'imageName')]
-    #[Assert\Image(
-        detectCorrupted:true,
-        maxSize: '2M',
-        notReadableMessage:"Le fichier est corrompu et ne peut pas être lu.",
-        mimeTypesMessage: "Le fichier soumis n'est pas une image valide. Veuillez sélectionner un fichier image.",
-    )]
-    private ?File $imageFile = null;
 
     public function getId(): ?int
     {
@@ -114,54 +102,10 @@ class Avis
         return $this->user;
     }
 
-    public function setUser(?User $user): static
+    public function setUser(User $user): static
     {
         $this->user = $user;
 
         return $this;
-    }
-
-
-    public function getImageName(): ?string
-    {
-        return $this->imageName;
-    }
-
-    public function setImageName(?string $imageName): void
-    {
-        $this->imageName = $imageName;
-    }
-
-    /**
-     * Get the value of imageFile
-     *
-     * @return ?File
-     */
-    public function getImageFile(): ?File
-    {
-        return $this->imageFile;
-    }
-
-    private ?\DateTimeImmutable $updatedAt = null;
-
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * Set the value of imageFile
-     *
-     * @param ?File $imageFile
-     *
-     * @return self
-     */
-    public function setImageFile(?File $imageFile = null): void
-    {
-        $this->imageFile = $imageFile;
-
-        if (null !== $imageFile) {
-            $this->updatedAt = new \DateTimeImmutable();
-        }
     }
 }

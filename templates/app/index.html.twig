@@ -1,34 +1,180 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}CCT-TOLERIE
+{% endblock %}
 
 {% block body %}
-    <h1>
-        App frontend
-    </h1>
-    <div class="container">
-			<h1 class="text-center">Laisser un avis</h1>
-			{{ form_start(form, {attr: {class: 'form-width'}}) }}
+
+	<section class="banner">
+		<div class="hero">
+			<div>
+				<h1>Un café ? ... Oui, mais
+					<span>design !</span>
+				</h1>
+				<p>Construisons
+					<span>l'espace</span>
+					qui vous ressemble</p>
+			</div>
+			<div class="call-to-action">
+				<a href="{{path ('app_devis_create')}}" class="button button-red">Demander un devis</a>
+			</div>
+		</div>
+	</section>
+	<div class="categories-navigation container">
+		<nav class="categories-navbar">
+			<ul class="categories-navbar-container">
+				<li class="categories-navbar-container-item">
+					<a href="#"><img src="{{ asset('images/navigation/picto_categorie.png')}}" alt="Icone escaliers pour se rendre sur la page de la catégorie escaliers"></a>
+					<p>Escaliers</p>
+				</li>
+				<li class="categories-navbar-container-item">
+					<a href="#"><img src="{{ asset('images/navigation/kitchen_room.png')}}" alt="Icone cuisines pour se rendre sur la page de la catégorie cuisines"></a>
+					<p>Cuisines</p>
+				</li>
+				<li class="categories-navbar-container-item">
+					<a href="#"><img src="{{ asset('images/navigation/house_fence.png')}}" alt="Icone gardes-corps pour se rendre sur la page de la catégorie gardes-corps"></a>
+					<p>Gardes-corps</p>
+				</li>
+				<li class="categories-navbar-container-item">
+					<a href="#"><img src="{{ asset('images/navigation/hammer_and_anvil.png')}}" alt="Icone metallerie pour se rendre sur la page de la catégorie metallerie"></a>
+					<p>Metallerie</p>
+				</li>
+				<li class="categories-navbar-container-item">
+					<a href="#"><img src="{{ asset('images/navigation/chair_side_view.png')}}" alt="Icone mobilier pour se rendre sur la page de la catégorie mobilier"></a>
+					<p>Mobilier</p>
+				</li>
+				<li class="categories-navbar-container-item">
+					<a href="#"><img src="{{ asset('images/navigation/open_sign.png')}}" alt="Icone professionnel pour se rendre sur la page de la catégorie professionnel"></a>
+					<p>Professionnel</p>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<section class="realisation-examples container">
+		<div class="realisation-examples-title section-title">
+			<h2>Quelques réalisations</h2>
+			<p class="bold">Découvrez tout nos projets d'aménagement sur le site</p>
+		</div>
+		<div class="realisation-examples-images flex justify-between align-center">
+			<div class="large-3 medium-3 small-12">
+				<img src="{{asset('images/realisation-examples/escalier-limon2.png')}}" alt="Image d'une réalisation de l'entreprise d'un escalier a limon">
+			</div>
+			<div class="large-6 medium-6 small-12">
+				<img src="{{asset('images/realisation-examples/cheminee.png')}}" alt="Image d'une réalisation de l'entreprise d'une cheminée">
+			</div>
+			<div class="large-3 medium-3 small-12">
+				<img src="{{asset('images/realisation-examples/escalier-limon-cremaillere3.png')}}" alt="Image d'une réalisation de l'entreprise d'un escalier a limon crémaillere">
+			</div>
+		</div>
+	</section>
+	<section class="company-informations container">
+		<div class="company-informations-title section-title">
+			<h2>Claude Chanavat Tolerie</h2>
+			<p class="bold">Travaux de chaudronnerie, tôlerie et soudure à Saint-Paul-en-Jarez</p>
+		</div>
+		<div class="flex justify-between">
+			<div class="large-6 medium-6 small-12">
+				<h3 class="mb-2">L'entreprise</h3>
+				<p>L’EURL Claude Chanavat Tolerie est l’histoire d’un homme à l’énergie débordante dont la curiosité et le goût des choses bien faite l’ont amené à travailler dans de nombreux domaines.</p>
+				<p>Fort de son expérience de plus de 10 ans en tant que dessinateur puis chef d’atelier en chaudronnerie dans une PME de la vallée du Gier, Mr Chanavat crée l’entreprise CCT en mai 2002. Il s’installe à Saint Chamond (42) dans un local de 300m².
+				</p>
+				<p>
+					Spécialiste dans la fabrication de matériels destinés principalement aux métiers de bouche, il développe alors rapidement son réseau de clientèle.</p>
+			</div>
+			<div class="large-6 medium-6 small-12">
+				<div class="image-after">
+					<div>
+						<img class="large-12" src="{{asset('images/company/company-image2.png')}}" alt="Image de l'entreprise">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="flex justify-between align-center">
+			<div class="large-6 medium-6 small-12 mt-4">
+				<div class="image-after">
+					<div>
+						<img class="large-12" src="{{asset('images/company/company-image1.png')}}" alt="Image de l'entreprise">
+					</div>
+				</div>
+			</div>
+			<div class="large-6 medium-6 small-12 mt-4">
+				<p>Il investit dans des machines outils plus performantes telles que cisaille, plieuse, poinçonneuse, tronçonneuse afin de répondre aux demandes.</p>
+				<p>
+					L’atelier devient alors trop petit et déménage à La Grand Croix (42) en 2007 et l’entreprise compte 6 personnes.
+				</p>
+				<p>En 5 ans, CCT se diversifie et propose ses services dans le domaine de la serrurerie et de la chaudronnerie industrielle.
+				</p>
+				<p>Son chiffre d’affaire en 2007 est de 650 000 euros.</p>
+			</div>
+		</div>
+		<h3 class="mt-4">L'évolutions, dates clés</h3>
+		<div class="flex justify-between mt-2">
+			<div class="large-6 medium-6 small-12">
+				<p class="bg-dark">De 2007 à 2010</p>
+				<p>De 2007 à 2010, l’activité de serrurerie prend de plus en plus d’importance dans le chiffre d’affaire de l’entreprise et 7 nouveaux postes sont alors créés. Au cours de cette période, Mr Chanavat dissocie l’activité de chaudronnerie inox de celle de la serrurerie en créant une nouvelle entreprise : Distrib’Inox.</p>
+			</div>
+			<div class="large-6 medium-6 small-12">
+				<p class="bg-dark">Fin 2010</p>
+				<p>Fin 2010, la croissance de l’activité de CCT impose un nouveau déménagement pour un site de plus de 6000m² à Saint Paul en Jarez (42).
+					Ce nouveau site comprend un atelier de 2250m² et des bureaux de 300m². Un atelier menuiserie est créé afin d’être plus compétitif notament sur la fabrication des marches d’escaliers mais aussi pour tous les produits comprenant du bois tel que le mobilier.</p>
+			</div>
+		</div>
+		<div class="flex justify-between mt-2">
+			<div class="large-6 medium-6 small-12">
+				<p class="bg-dark">En 2012</p>
+				<p>En 2012, le chiffre d’affaire de CCT dépasse alors les 2 milions d’euros.</p>
+			</div>
+			<div class="large-6 medium-6 small-12">
+				<p class="bg-dark">Fin 2014</p>
+				<p>En 2014, CCT intègre un responsable commercial dans le but de mieux faire connaître l’entreprise. Un poste de responsable d’atelier est créé afin d’optimiser nos process de fabrication et de faire le lien entre l’atelier et les différents services de l’entreprise. CCT compte alors 19 salariés</p>
+			</div>
+		</div>
+	</section>
+	<section class="avis container-full">
+		<div class="container">
+			<div class="flex justify-between">
+				{% for avi in avis %}
+					<div class="card-avis-frontend large-4 medium-4 small-12">
+						<div class="card-avis-frontend-icon">
+							<p>{{ avi.firstname|getInitials(avi.lastname) }}</p>
+						</div>
+						<p class="bold">{{ avi.firstname }}
+							{{ avi.lastname }}</p>
+						<p>{{ avi.comment|cutString(300) }}</p>
+						<div class="stars">
+							{{ avi.note|showStars() }}
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="text-center mt-4">
+				<a href="{{path('app_avis_create')}}" class="button button-dark">Laissez nous un avis</a>
+			</div>
+		</div>
+	</section>
+	<section class="contact container">
+		<div class="large-8 medium-12 small-12 contact-form">
+			<h1>Contactez-nous</h1>
+			<p class="bold">Pour plus d'informations</p>
+			{{ form_start(form) }}
 
 			{{ form_errors(form) }}
-			<div class="form-group">
+			<div>
 				{{ form_row(form.firstname) }}
 			</div>
-			<div class="form-group">
+			<div>
 				{{ form_row(form.lastname) }}
 			</div>
-            <div class="form-group">
-				{{ form_row(form.comment) }}
+			<div>
+				{{ form_row(form.email) }}
 			</div>
-            <div class="form-group">
-				{{ form_row(form.note) }}
+			<div>
+				{{ form_row(form.message) }}
 			</div>
-            <div class="form-group">
-				{{ form_row(form.imageFile) }}
-			</div>
-			<div class="form-label-input text-center">
-				<button type="submit" path="{{ path('app_index') }}" class="button button-red">Commenter</button>
+			<div class="form-label-input">
+				<button type="submit" path="{{ path('app_app') }}" class="button button-red">Envoyer</button>
 			</div>
 			{{ form_end(form) }}
 		</div>
+	</section>
 {% endblock %}
