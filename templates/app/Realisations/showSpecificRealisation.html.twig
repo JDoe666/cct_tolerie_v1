@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}}
+	Catégories
+{% endblock %}
+
+{% block body %}
+	<section class="container">
+		<div class="flex" style="gap: 48px">
+			<div class="large-8 medium-8 small-12">
+				<h2>{{category.name}}</h2>
+				<h3 class="mb-2">{{realisation.name}}</h3>
+				<div class="image-after">
+					<div>
+						<img {{stimulus_controller('lightbox')}} class="large-12" src="{{ vich_uploader_asset(realisation)}}" alt="Image de la réalisation liée a la page actuelle">
+					</div>
+				</div>
+				<p class="mt-2">{{realisation.description}}</p>
+				<div class="mt-4">
+					<h3 class="mb-2">Autres catégories</h3>
+					<div class="flex" style="gap: 32px">
+						{% for categorie in categories %}
+							<a href="{{path('app_categories_name', {slug: categorie.slug})}}" class="large-4 medium-6 small-12 categorie-link" style="gap: 48px">
+								<div class="other-image-categorie">
+									<img class="large-12" src="{{ vich_uploader_asset(categorie)}}" alt="Image liée à une certaine catégorie (escaliers, métallerie...)">
+								</div>
+								<div class="mt-1">
+									<p class="bold">{{categorie.name}}</p>
+								</div>
+							</a>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			<div class="large-4 medium-4 small-12">
+				<h3 class="mb-2">Dans la même catégorie</h3>
+				{% for realisation in realisationsSameCategory %}
+					<div class="mb-5">
+						<div class="image-after mb-3">
+							<div>
+								<img class="large-12" src="{{ vich_uploader_asset(realisation)}}" alt="Image d'une réalisation faisant partie de la meme catégorie que celle sélectionné">
+							</div>
+						</div>
+						<p class="bold">{{realisation.name}}</p>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+	<div class="light-box">
+		<div></div>
+	</div>
+{% endblock %}

@@ -1,4 +1,4 @@
-.menu .link::after {
+.menu-lateral .link::after {
   content: "";
  
   display: block;
@@ -32,7 +32,7 @@
   }
 }
 
-  .menu .link:hover::after {
+  .menu-lateral .link:hover::after {
     transform: scale(1);
     transform-origin: left;
   }

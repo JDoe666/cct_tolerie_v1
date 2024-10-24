@@ -1,25 +1,31 @@
 @import './typography';
 
-h1, h2, h3, h4, h5, h6 {
+h1 , h2 , .slogan {
     font-family: "Allerta Stencil", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
 
-h1 {
-    font-size: 32px;
+h3, h4, h5, h6 , .subtitle {
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: bold;
+}
+
+
+h1, .slogan {
+    font-size: 64px;
 }
 
 h2 {
-    font-size: 26px
+    font-size: 48px
 }
 
-h3 {
-    font-size: 24px;
+h3, .subtitle {
+    font-size: 32px;
 }
 
 h4 {
-    font-size: 22px;
+    font-size: 24px;
 }
 
 body {

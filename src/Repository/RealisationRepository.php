@@ -43,6 +43,14 @@ class RealisationRepository extends ServiceEntityRepository
             $search->getLimit(),
         );
     }
+    public function findThreeRandomByCategory($category): array {
+        return $query = $this->createQueryBuilder('r')
+            ->andWhere('r.categorie =:categorie')
+            ->setParameter('categorie', $category)
+            ->orderBy('RAND()')
+            ->setMaxResults(3)->getQuery()->getResult();
+            
+    }
 
     //    /**
     //     * @return Realisation[] Returns an array of Realisation objects

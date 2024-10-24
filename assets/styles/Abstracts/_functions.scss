@@ -26,4 +26,16 @@ $gutter: 48px;
   .small{
     @include largeur-modifier;
   }
+
+  .first {
+    order: 1;
+  }
+
+  .second {
+    order: 2;
+  }
+
+  .thrid {
+    order:3;
+  }
 }
