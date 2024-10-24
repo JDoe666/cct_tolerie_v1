@@ -1,0 +1,34 @@
+.banner {
+    background-image: url('~/public/images/banner/banniere.png');
+    background-repeat: no-repeat;
+    margin-top: -134px !important;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    .hero {
+        margin-right: auto;
+        margin-left: auto;
+        position:absolute;
+        top: 48%;
+        left: 39%;
+        transform: translate(-50%, -50%);
+        span {
+            color: $yellow;
+        }
+        h1 {
+            color: white;
+        }
+        p {
+            color: white;
+        }
+        .slogan-description {
+            font-size: 40px;
+        }
+        .call-to-action {
+            margin-top: 2rem;
+            a {
+                font-size: 20px;
+            }
+        }
+    }
+}

@@ -17,26 +17,14 @@ class AvisRepository extends ServiceEntityRepository
     public function __construct(
         ManagerRegistry $registry,
         private PaginatorInterface $paginator,
-        )
-    {
+    ) {
         parent::__construct($registry, Avis::class);
     }
 
-    public function findAvisData(AvisFilter $search): PaginationInterface
-    {
-        $query = $this->createQueryBuilder('a')
-            ->select('a');
-
-        if (!empty($search->getQuery())) {
-            $query = $query->andWhere('a.firstname LIKE :query OR a.lastname LIKE :query OR a.createdAt LIKE :query')
-                ->setParameter('query', "%{$search->getQuery()}%");
-        }
-
-        return $this->paginator->paginate(
-            $query->getQuery(),
-            $search->getPage(),
-            $search->getLimit(),
-        );
+    public function findThreeRandomAvis(): Array {
+       return $this->createQueryBuilder('a')
+        ->andWhere('a.note >= 3')->orderBy('RAND()')
+        ->setMaxResults(3)->getQuery()->getResult();
     }
     //    /**
     //     * @return Avis[] Returns an array of Avis objects

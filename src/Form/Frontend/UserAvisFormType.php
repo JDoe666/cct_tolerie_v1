@@ -5,6 +5,7 @@ namespace App\Form\Frontend;
 use App\Entity\Avis;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,17 +29,10 @@ class UserAvisFormType extends AbstractType
                 'label' => 'Commentaire',
                 'required' => true,
             ])
-            ->add('note', CheckboxType::class, [
+            ->add('note', HiddenType::class, [
                 'label' => false,
                 'required' => false,
-            ])
-            ->add('imageFile', VichImageType::class, [
-                'required' => false,
-                'download_uri' => false,
-                'image_uri' => true,
-                'asset_helper' => true,
-                'label' => 'Image',
-                ]);
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

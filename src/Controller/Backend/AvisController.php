@@ -25,66 +25,14 @@ class AvisController extends AbstractController
     ) {
     }
 
-    #[Route('', name: 'app_index', methods: ['GET', 'POST'])]
-    public function index(Request $request, AvisRepository $avisRepository, UserInterface $user): Response
-    {
-        /**
-         * @var User $user
-         */
-        $user = $this->getUser();
-        $avis = new Avis();
-        $avis->setFirstname($user->getFirstname());
-        $avis->setLastname($user->getLastname());
-        $avis->setUser($user);
-
-        $form = $this->createForm(UserAvisFormType::class, $avis);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            if (!$this->security->isGranted('IS_AUTHENTICATED_FULLY')) {
-                $this->addFlash('danger', 'Vous devez être connecté pour poster un commentaire.');
-                return $this->redirectToRoute('app_index');
-            }
-
-            $existingAvis = $avisRepository->findOneByUser($user);
-
-            if ($existingAvis) {
-
-                $this->addFlash('danger', 'Vous avez déjà soumis un avis. Si vous le souhaitez, vous pouvez modifier votre avis actuel.');
-
-                return $this->redirectToRoute('app_index');
-            }
-
-            $this->em->persist($avis);
-            $this->em->flush();
-
-            $this->addFlash('success', 'Votre commentaire a été posté !');
-
-            return $this->redirectToRoute('app_index');
-        }
-
-        return $this->render('app/index.html.twig', [
-            'form' => $form,
-        ]);
-    }
-
     #[Route('admin/avis', name: 'admin_avis_index', methods: ['GET'])]
-    public function manage(Request $request): Response
+    public function manage(): Response
     {
 
-        $data = new AvisFilter();
-
-        $data->setPage($request->get('page', 1));
-        $data->setLimit($request->get('limit', 10));
-
-        $form = $this->createForm(SearchAvisType::class, $data);
-        $form->handleRequest($request);
-
-        $avis = $this->avisRepository->findAvisData($data);
+        $avis = $this->avisRepository->findAll();
 
         return $this->render('Backend/Avis/index.html.twig', [
             'avis' => $avis,
-            'form' => $form,
         ]);
     }
 

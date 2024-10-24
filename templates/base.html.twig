@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>
 			{% block title %}CCT_Tolerie |
 			{% endblock %}
@@ -17,7 +18,7 @@
 	</head>
 	<body>
 		{% include 'Frontend/Layout/header.html.twig' %}
-		<main>
+		<main class="main-front">
 			{% include 'Frontend/Layout/flash.html.twig' %}
 			{% block body %}{% endblock %}
 		</main>

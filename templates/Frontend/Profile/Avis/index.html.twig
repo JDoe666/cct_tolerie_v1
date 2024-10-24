@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}}
+	Profile
+{% endblock %}
+
+{% block body %}
+	<section class="container">
+		<div class="profile-wrapper">
+			<div>
+				{% include 'Frontend/Profile/Layout/_profileNavigation.html.twig' %}
+			</div>
+			<div>
+				<h1>Mon avis</h1>
+				<p>Ici vous pouvez gérer votre avis</p>
+                {% if avis == null %}
+                   <p class="bold">Vous n'avez pas encore renseigné d'avis ?</p>
+                   <div class="mt-2"><a href="{{path('app_avis_create')}}" class="button button-update">Ajouter un avis</a></div>
+                {% endif %}
+				<div class="address-wrapper">
+						<div class="address-card">
+							<div class="address-card-header">
+								<div>
+									<span>Commentaire</span>
+									<p>{{ avis.comment }}</p>
+								</div>
+							</div>
+							<div class="address-card-content">
+								<div>
+									<span>Note</span>
+									<p>{{ avis.note|showStars() }}</p>
+								</div>
+							</div>
+							<div class="address-card-footer">
+									{# <a href="{{ path('app_profile_address_update', {id: address.id}) }}" class="button button-update">Modifier</a>
+									{% include 'Frontend/Profile/Address/delete.html.twig' %} #}
+							</div>
+						</div>
+				</div>
+				{# <a href="{{ path('app_profile_address_create') }}" class="button button-update">Ajouter une autre adresse</a> #}
+			</div>
+		</div>
+	</section>
+{% endblock %}

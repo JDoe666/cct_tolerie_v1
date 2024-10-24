@@ -25,7 +25,8 @@ class UserController extends AbstractController
 
     #[Route('', name: '_index', methods: ['GET'])]
     public function index(Request $request): Response
-    {
+    {   
+
         $data = new UserFilter;
 
         $data->setPage($request->get('page', 1));

@@ -1,77 +1,85 @@
-<header>
-	{% include 'Frontend/Layout/_logo.html.twig' %}
-	<nav>
-		<ul class="menu">
+<header {{stimulus_controller('dropDownHeader')}}>
+	<div class="logo">
+		{% include 'Frontend/Layout/_logo.html.twig' %}
+	</div>
+	<nav class="menu-lateral">
+		<ul>
 			<li class="item">
-				<a class="link" href="">Accueil</a>
+				<a class="link" href="{{path('app_app')}}">Accueil</a>
 			</li>
-			<li class="item">
-				<a class="link" href="">L'entreprise</a>
-			</li>
-			<ul class="dropdown">
-				<li>
-					<a href="#" class="dropButton">Réalisations<i class="bi bi-caret-down-square-fill"></i>
-					</a>
-				</li>
-				<ul id="myDropdown" class="dropdown-content">
+			<li class="dropdown">Realisations
+				<i class="bi bi-arrow-down-square-fill"></i>
+				<ul class="sous-menu">
+						<li>
+							<a href="{{path('app_categories_name', {slug: 'escaliers'})}}">Escaliers</a>
+						</li>
+						<li>
+							<a href="{{path('app_categories_name', {slug: 'cuisines'})}}">Cuisines</a>
+						</li>
+						<li>
+							<a href="{{path('app_categories_name', {slug: 'gardes-corps'})}}">Gardes-corps</a>
+						</li>
+						<li>
+							<a href="{{path('app_categories_name', {slug: 'metallerie'})}}">Metallerie</a>
+						</li>
+						<li>
+							<a href="{{path('app_categories_name', {slug: 'mobilier'})}}">Mobilier</a>
+						</li>
+						<li>
+							<a href="{{path('app_categories_name', {slug: 'professionnel'})}}">Professionnel</a>
+						</li>
 					<li>
-						<a href="#">Escaliers</a>
-					</li>
-					<li>
-						<a href="#">Cuisines</a>
-					</li>
-					<li>
-						<a href="#">Gardes-corps</a>
-					</li>
-					<li>
-						<a href="#">Metallerie</a>
-					</li>
-					<li>
-						<a href="#">Mobilier</a>
-					</li>
-					<li>
-						<a href="#">Professionnel</a>
+						<a href="{{path('app_categories')}}">Toutes les catégories</a>
 					</li>
 				</ul>
-			</ul>
-			{% if (app.user) %}
-				<ul class="dropdown">
-					<li>
-						<a href="{{ path('app_profile_index') }}" class="dropButton">Mon compte<i class="bi bi-caret-down-square-fill"></i>
-						</a>
-					</li>
-					{% if app.user.isVerified %}
-						<ul id="myDropdown2" class="dropdown-content">
-							<li class="item">
-								<a href="{{ path('app_profile_index') }}">Mon compte</a>
-							</li>
-							<li class="item">
-								<a href="">Mes devis</a>
-							</li>
-							<li class="item">
-								<a href="{{ path('app_logout') }}" data-turbo="false">Déconnexion</a>
-							</li>
-						</ul>
-						{% if is_granted('ROLE_ADMIN')%}
-							<ul id="myDropdown2" class="dropdown-content">
+			</li>
+			{% if app.user %}
+				{% if app.user.isVerified %}
+					{% if is_granted('ROLE_ADMIN') %}
+						<li class="dropdown">Mon profile
+							<i class="bi bi-arrow-down-square-fill"></i>
+							<ul class="sous-menu">
 								<li class="item">
 									<a href="{{ path('app_profile_index') }}">Mon compte</a>
 								</li>
 								<li class="item">
-									<a href="{{path('admin_users_index')}}">Gestion</a>
+									<a href="{{ path('admin_users_index') }}">Gestion</a>
 								</li>
 								<li class="item">
 									<a href="{{ path('app_logout') }}" data-turbo="false">Déconnexion</a>
 								</li>
 							</ul>
-						{% endif %}
+						</li>
+					{% else %}
+						<li class="dropdown">Mon compte
+							<ul class="sous-menu">
+								<li class="item">
+									<a href="{{ path('app_profile_index') }}">Mon compte</a>
+								</li>
+								<li class="item">
+									<a href="">Mes devis</a>
+								</li>
+								<li class="item">
+									<a href="{{ path('app_logout') }}" data-turbo="false">Déconnexion</a>
+								</li>
+							</ul>
+						</li>
 					{% endif %}
-				</ul>
+				{% elseif app.user.isVerified == false %}
+					<li>
+						<a href="{{ path('app_profile_index') }}">Mon compte</a>
+					</li>
+				{% endif %}
 			{% else %}
-				<li class="item">
-					<a href="{{ path('app_login') }}" class="link">Se connecter</a>
+				<li>
+					<a href="{{ path('app_login') }}">Se connecter</a>
 				</li>
 			{% endif %}
+			<li class="item">
+				<a class="button button-red-header" href="{{ path('app_devis_create') }}">Demander un devis</a>
+			</li>
 		</ul>
 	</nav>
+	<div class="burger"></div>
 </header>
+<div class="mask"></div>

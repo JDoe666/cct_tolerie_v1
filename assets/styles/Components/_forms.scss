@@ -17,6 +17,12 @@
     border: solid 1px $yellow;
 }
 
+.form-width-75 {
+    margin-bottom:4rem;
+    width: 75%;
+    padding: 1rem;
+}
+
 .vich-image {
     .mb-3 {
        display:none;
@@ -125,5 +131,26 @@ fieldset {
 .form-button {
     &-icon {
         font-size: 1.5rem;
+    }
+}
+
+.notes {
+    margin-right: auto;
+    margin-left: auto;
+    cursor: pointer;
+    span {
+        color: $red;
+        font-size: 32px;
+    }
+}
+
+.contact-form {
+    margin-right: auto;
+    margin-left: auto;
+    .bold {
+        margin-bottom: 1rem;
+    }
+    .button-red {
+        padding: 8px 64px;
     }
 }

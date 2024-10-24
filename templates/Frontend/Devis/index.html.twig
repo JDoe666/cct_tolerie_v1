@@ -14,6 +14,10 @@
 			<div>
 				<h1>Mes devis</h1>
 				<p>Ici vous pouvez voir vos demandes de devis</p>
+				{% if devis|length == 0 %}
+					<p class="bold">Vous n'avez pas encore demandé un devis ?</p>
+                   <div class="mt-2"><a href="{{path('app_devis_create')}}" class="button button-update">Demander un devis</a></div>
+				{% endif %}
                 <div class="wrapper-devis-slider">
 					<div class="swiper" {{ stimulus_controller('devisSwiper')}}>
 						<div class="swiper-wrapper">

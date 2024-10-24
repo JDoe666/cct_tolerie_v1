@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}}
+	Catégories
+{% endblock %}
+
+{% block body %}
+	<section class="container flex" style="gap: 48px">
+        <div class="image-after image-categories large-4 medium-4 small-12">
+            <div>
+                <img class="large-12" src="{{ vich_uploader_asset(categorie)}}" alt="">
+            </div>
+        </div>
+		<div class="large-8 medium-8 small-12">
+			<h1>{{categorie}}</h1>
+			<h3 class="mb-1">Les différents modèles de la catégorie</h3>
+			<p>{{categorie.description}}</p>
+		</div>
+	</section>
+	<section class="container">
+		<div class="flex" style="gap: 48px">
+			{% for realisation in realisations %}
+				<div class="large-4 medium-4 small-12 mb-5">
+					<a href="{{path('app_realisations_name', {slugr: realisation.slug, id: realisation.id, slug: categorie.slug})}}" class="categorie-link">
+						<div class="image-categories">
+							<div>
+								{% if realisation.imageName|length > 0 %}
+									<img class="large-12" src="{{ vich_uploader_asset(realisation)}}" alt="">
+								{% endif %}
+							</div>
+						</div>
+						<p class="mt-1">{{realisation.name}}</p>
+					</a>
+				</div>
+			{% endfor %}
+		</div>
+	</section>
+
+{% endblock %}
