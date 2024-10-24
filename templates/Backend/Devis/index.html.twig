@@ -1,0 +1,132 @@
+{% extends 'Backend/base.html.twig' %}
+
+{% block title %}
+	{{parent()}}
+	Devis
+{% endblock %}
+
+{% block body %}
+	<section class="container">
+		<div class="container text-center">
+			<h1 class="text-center">Administration des demande de devis</h1>
+		</div>
+		<div class="dropdown-management">
+			<div class="container admin-filter">
+				<button class="admin-filter-button" data-controller="user-filter">Filtrer<i class="bi bi-filter-right"></i>
+				</button>
+				{% include 'Backend/Devis/Components/Filters/_devisFilter.html.twig' %}
+			</div>
+			<div class="container admin-pagination dropdown-pagination">
+				<button class="admin-filter-button" {{ stimulus_controller('user-pagination')}}>Trier /
+					{{ devis.getTotalItemCount }}
+					{{ devis.getTotalItemCount > 1 ? 'Devis' : 'devis'}}<i class="bi bi-sort-alpha-down-alt"></i>
+				</button>
+				{% include 'Backend/Devis/Components/Pagination/_devisSortable.html.twig' %}
+			</div>
+		</div>
+		<div class="container-pages-management">
+			<div>
+				{{ knp_pagination_render(devis) }}
+			</div>
+			<ul>
+				<li>
+					<ahref="{{path('admin_devis_index',app.request.query.all|merge({limit:10}))}}">10</ahref=>
+				</li>
+				<li>
+					<ahref="{{path('admin_devis_index',app.request.query.all|merge({limit:25}))}}">25</ahref=>
+				</li>
+				<li>
+					<ahref="{{path('admin_devis_index',app.request.query.all|merge({limit:50}))}}">50</ahref=>
+				</li>
+				<li>
+					<ahref="{{path('admin_devis_index',app.request.query.all|merge({limit:100}))}}">100</ahref=>
+				</li>
+			</ul>
+		</div>
+		<div class="container wrapper-devis">
+			{% for devi in devis %}
+				<div class="card-admin">
+					<div class="card-admin-header">
+						{% if devi.devisImages|length > 0 %}
+							<div class="swiper" {{ stimulus_controller('carousel') }}>
+								<div class="swiper-wrapper">
+									{% for image in devi.devisImages %}
+										<div class="swiper-slide">
+											<img src="{{ vich_uploader_asset(image)}}" alt="">
+										</div>
+									{% endfor %}
+								</div>
+								<div class="swiper-button-prev"></div>
+								<div class="swiper-button-next"></div>
+							</div>
+						{% endif %}
+					</div>
+					<div class="card-admin-content">
+						<div class="card-admin-content-description">
+							<div class="card-admin-content-description-title">
+								<h3>
+									Informations devis
+								</h3>
+							</div>
+							<div class="card-admin-content-informations">
+								<div class="left">
+									<div>
+										<p class="bold">Prénom et nom</p>
+									</div>
+									<div>
+										<p>{{devi.firstName}}
+											{{devi.lastName}}</p>
+									</div>
+									<div>
+										<p class="bold">Email</p>
+									</div>
+									<div>
+										<p>{{devi.user.email}}</p>
+									</div>
+									<div>
+										<p class="bold">Adresse</p>
+										<p>{{devi.address.address}}</p>
+										<p>{{devi.address.zipCode}}</p>
+										<p>{{devi.address.city}}</p>
+									</div>
+									<div>
+										<p class="bold">Création</p>
+										<p>{{devi.createdAt|date("d-m-Y H:i:s")}}</p>
+									</div>
+								</div>
+								<div class="right">
+									<div>
+										<p class="bold">Status</p>
+										{% if devi.status == "En attente" %}
+											<p class="border-grey border">{{devi.status}}</p>
+										{% elseif devi.status == "Accepté" %}
+											<p class="border-yellow border">{{devi.status}}</p>
+										{% elseif devi.status == "Terminé" %}
+											<p class="border-green border">{{devi.status}}</p>
+										{% elseif devi.status == "Annulé" %}
+											<p class="border-orange border">{{devi.status}}</p>
+											<p>Annulé par {{ devi.canceledBy == 'admin' ? 'un administrateur' : 'le client' }}</p>
+										{% else %}
+											<p class="border-red border">{{devi.status}}</p>
+										{% endif %}
+										<p>
+											<a href="{{ path('admin_devis_update', {id: devi.id}) }}" id="devis-btn" class="button button-update">Modifier</a>
+										</p>
+									</div>
+									<div>
+										<p class="bold">Titre</p>
+										<p>{{devi.name}}</p>
+									</div>
+									<div>
+										<p class="bold">Description</p>
+										<p>{{devi.description}}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</section>
+{% endblock %}

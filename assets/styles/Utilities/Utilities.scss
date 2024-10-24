@@ -14,3 +14,65 @@
 .text-danger {
     color: rgba(164, 28, 28, 0.855);
 }
+
+.bold {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.border {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.border-grey {
+    color:white;
+    width:35%;
+    padding:4px;
+    background-color: grey;
+    border-radius: 4px;
+}
+
+.border-yellow {
+    color:white;
+    width:35%;
+    padding:4px;
+    background-color: rgb(186, 186, 57);
+    border-radius: 4px;
+}
+
+.mt-1 {
+    margin-top: 0.5rem;
+}
+
+.border-orange {
+    color:white;
+    width:35%;
+    padding:4px;
+    background-color: orange;
+    border-radius: 4px;
+}
+
+.border-green {
+    color:white;
+    width:35%;
+    padding:4px;
+    background-color: green;
+    border-radius: 4px;
+}
+
+.border-red {
+    color:white;
+    width:35%;
+    padding:4px;
+    background-color: red;
+    border-radius: 4px;
+}
+
+#devis-btn {
+    margin-top:0.8rem;
+    display: block;
+    width:50%;
+    margin-right: auto;
+    margin-left: auto;
+}

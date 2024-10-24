@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}}
+	Profile
+{% endblock %}
+
+{% block body %}
+	<section class="container">
+		<div class="profile-wrapper">
+			<div>
+				{% include 'Frontend/Profile/Layout/_profileNavigation.html.twig' %}
+			</div>
+			<div>
+				<h1>Mes devis</h1>
+				<p>Ici vous pouvez voir vos demandes de devis</p>
+                <div class="wrapper-devis-slider">
+					<div class="swiper" {{ stimulus_controller('devisSwiper')}}>
+						<div class="swiper-wrapper">
+							{% for devis in devis %}
+								<div class="swiper-slide">
+									<div class="devis-card">
+										<div class="devis-card-header">
+											{% if devis.devisImages|length > 0 %}
+												<div class="swiper" {{ stimulus_controller('carousel') }}>
+													<div class="swiper-wrapper">
+														{% for image in devis.devisImages %}
+															<div class="swiper-slide">
+																<img src="{{ vich_uploader_asset(image)}}" alt="">
+															</div>
+														{% endfor %}
+													</div>
+													<div class="swiper-button-prev"></div>
+													<div class="swiper-button-next"></div>
+												</div>
+											{% endif %}
+										</div>
+										<div class="devis-card-content">
+											<p class="bold">{{ devis.name }}</p>
+											<p class="bold">Description
+											</p>
+											<p>{{ devis.description }}</p>
+											<p class="bold">Date</p>
+											<p>{{ devis.createdAt|date('d/m/Y H:i:s') }}</p>
+											<p class="bold">Status</p>
+											{% if devis.status == "En attente" %}
+												<p class="border-grey">{{devis.status}}</p>
+											{% elseif devis.status == "Accepté" %}
+												<p class="border-yellow">{{devis.status}}</p>
+                                                <p>Bonne nouvelle ! Votre devis a été accepté !</p>
+                                                <p>Un email vous à été envoyé.</p>
+											{% elseif devis.status == "Terminé" %}
+												<p class="border-green">{{devis.status}}</p>
+                                                <p>Bonne nouvelle ! Votre devis est terminé !</p>
+                                                <p>Un email vous à été envoyé.</p>
+											{% elseif devis.status == "Annulé" %}
+												<p class="border-orange">{{devis.status}}</p>
+                                                <p>Votre devis à été annulé.</p>
+                                                <p>Un email vous à été envoyé pour plus d'informations.</p>
+											{% else %}
+												<p class="border-red">{{devis.status}}</p>
+                                                <p>Votre devis à été refusé</p>
+                                                <p>Un email vous à été envoyé pour plus d'informations.</p>
+											{% endif %}
+											{% if devis.status == "En attente" %}
+												{% include 'Frontend/Devis/delete.html.twig' %}
+											{% endif %}
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+                    <div class="bi bi-arrow-right button-next-devis"></div>
+					<div class="bi bi-arrow-left button-prev-devis"></div>
+                    </div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

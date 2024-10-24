@@ -36,26 +36,30 @@
 				<li><a href="{{path('admin_categories_index',app.request.query.all|merge({limit:100}))}}">100</a></li>
 			</ul>
 		</div>
-		<div class="wrapper-cards">
+		<div class="container wrapper-cards">
 			{% for categorie in categories %}
 				<div class="card-admin">
 					<div class="card-admin-header">
-						{% if categorie.imageName %}
+						{% if categorie.imageName|length > 0 %}
 							<img src="{{ vich_uploader_asset(categorie)}}" alt="">
 						{% endif %}
 					</div>
 					<div class="card-admin-content">
+					<div class="card-admin-content-description">
+							<p class="bold">Auteur</p>
+							<p>{{categorie.user.email}}</p>
+						</div>
 						<div class="card-admin-content-description">
-							<h3>Nom</h3>
+							<p class="bold">Nom</p>
 							<p>{{categorie.name}}</p>
 						</div>
 						<div class="card-admin-content-description">
-							<h3>Création</h3>
+							<p class="bold">Création</p>
 							<p>{{categorie.createdAt|date("d-m-Y")}}</p>
 						</div>
 					</div>
 					<div class="card-admin-manage">
-						<a href="{{ path('admin_categories_update', {slug: categorie.slug}) }}" class="button-frontend">Modifier</a>
+						<a href="{{ path('admin_categories_update', {slug: categorie.slug}) }}" class="button button-update">Modifier</a>
 						{% include 'Backend/Categorie/delete.html.twig' %}
 					</div>
 				</div>

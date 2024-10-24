@@ -1,0 +1,25 @@
+{% extends 'Backend/base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	Modifier le status d'un devis
+{% endblock %}
+
+{% block body %}
+		<div class="container">
+			<h1 class="text-center">Modifier un devis</h1>
+
+			{{ form_start(form, {attr: {class: 'form-width form-margin-bottom-admin', 'data-controller': 'modal'}}) }}
+			{{ form_errors(form) }}
+			<div class="form-group">
+				{{ form_row(form.status) }}
+			</div>
+			<div class="form-label-input text-center">
+				<button type="submit" class="button button-update">Modifier</button>
+			</div>
+			{{ form_end(form) }}
+		</div>
+		<div class="form-label-input text-center">
+			<a href="{{ path('admin_devis_index') }}" class="button button-return">Retour aux devis</a>
+		</div>
+{% endblock %}

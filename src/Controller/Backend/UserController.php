@@ -36,7 +36,6 @@ class UserController extends AbstractController
 
         $users = $this->userRepository->findUserData($data);
 
-
         return $this->render('Backend/Users/index.html.twig', [
             'users' => $users,
             'form' => $form,

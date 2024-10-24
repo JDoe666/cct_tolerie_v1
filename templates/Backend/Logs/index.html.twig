@@ -1,0 +1,112 @@
+{% extends 'Backend/base.html.twig' %}
+
+{% block title %}
+	{{parent()}}
+	Modifications effectuées
+{% endblock %}
+
+{% block body %}
+	<section class="container">
+		<div class="text-center">
+			<h1>Changements sur les devis</h1>
+		</div>
+		<div class="container-pages-management">
+			<div>
+				{{ knp_pagination_render(devisLogs) }}
+			</div>
+			<ul>
+				<li>
+					<ahref="{{path('admin_logs_index',app.request.query.all|merge({limit:10}))}}">10</ahref=>
+				</li>
+				<li>
+					<ahref="{{path('admin_logs_index',app.request.query.all|merge({limit:25}))}}">25</ahref=>
+				</li>
+				<li>
+					<ahref="{{path('admin_logs_index',app.request.query.all|merge({limit:50}))}}">50</ahref=>
+				</li>
+				<li>
+					<ahref="{{path('admin_logs_index',app.request.query.all|merge({limit:100}))}}">100</ahref=>
+				</li>
+			</ul>
+		</div>
+		<table class="admin-table">
+			<thead>
+				<tr>
+					<th scope="col">Libellé du devis</th>
+					<th scope="col">Date de création du devis</th>
+					<th scope="col">Email de l'administrateur ayant effectué l'action</th>
+					<th scope="col">Roles</th>
+					<th scope="col">Action</th>
+					<th scope="col">Ancien status</th>
+					<th scope="col">Nouveau status</th>
+					<th scope="col">Action effectuée le</th>
+				</tr>
+			</thead>
+			<tbody class="admin-table-tbody">
+				{% for devisLog in devisLogs %}
+					<tr>
+						<td>{{ devisLog.devis.name }}</td>
+						<td>{{ devisLog.devis.createdAt|date("d-m-Y") }}</td>
+						<td>{{ devisLog.administration.email }}</td>
+						{% set roles = devisLog.administration.roles %}
+						{% if 'ROLE_SUPER_ADMIN' in roles and 'ROLE_ADMIN' in roles and 'ROLE_USER' in roles %}
+							<td>Utilisateur | Administrateur | Super Administrateur
+							</td>
+						{% elseif 'ROLE_ADMIN' in roles and 'ROLE_USER' in roles %}
+							<td>Utilisateur | Administrateur
+							</td>
+						{% else %}
+							<td>Utilisateur</td>
+						{% endif %}
+						<td class="{{ devisLog.action == 'Modification' ? 'table-log-modificated' : ''}}">{{ devisLog.action }}</td>
+						{% set oldStatus = devisLog.details.old_status %}
+						{% set newStatus = devisLog.details.new_status %}
+						{% if oldStatus == "En attente" %}
+							<td>
+								<p class="log-status-waiting">{{oldStatus}}</p>
+							</td>
+						{% elseif oldStatus == "Accepté" %}
+							<td>
+								<p class="log-status-accepted">{{oldStatus}}</p>
+							</td>
+						{% elseif oldStatus == "Terminé" %}
+							<td>
+								<p class="log-status-finished">{{oldStatus}}</p>
+							</td>
+						{% elseif oldStatus == "Annulé" %}
+							<td>
+								<p class="log-status-canceled">{{oldStatus}}</p>
+							</td>
+						{% else %}
+							<td>
+								<p class="log-status-avoided">{{oldStatus}}</p>
+							</td>
+						{% endif %}
+						{% if newStatus == "En attente" %}
+							<td>
+								<p class="log-status-waiting">{{newStatus}}</p>
+							</td>
+						{% elseif newStatus == "Accepté" %}
+							<td>
+								<p class="log-status-accepted">{{newStatus}}</p>
+							</td>
+						{% elseif newStatus == "Terminé" %}
+							<td>
+								<p class="log-status-finished">{{newStatus}}</p>
+							</td>
+						{% elseif newStatus == "Annulé" %}
+							<td>
+								<p class="log-status-canceled">{{newStatus}}</p>
+							</td>
+						{% else %}
+							<td>
+								<p class="log-status-avoided">{{newStatus}}</p>
+							</td>
+						{% endif %}
+						<td>{{ devisLog.createdAt|date("d-m-Y H:m:i") }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</section>
+{% endblock %}

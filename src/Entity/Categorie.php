@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Traits\DateTimeTrait;
 use App\Repository\CategorieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -48,6 +50,21 @@ class Categorie
 
     #[Vich\UploadableField(mapping: 'categories', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
+
+    /**
+     * @var Collection<int, Realisation>
+     */
+    #[ORM\OneToMany(targetEntity: Realisation::class, mappedBy: 'categorie')]
+    private Collection $realisations;
+
+    #[ORM\ManyToOne(inversedBy: 'categories')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    public function __construct()
+    {
+        $this->realisations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -112,5 +129,51 @@ class Categorie
         if (null !== $imageFile) {
             $this->updatedAt = new \DateTimeImmutable();
         }
+    }
+
+    /**
+     * @return Collection<int, Realisation>
+     */
+    public function getRealisations(): Collection
+    {
+        return $this->realisations;
+    }
+
+    public function addRealisation(Realisation $realisation): static
+    {
+        if (!$this->realisations->contains($realisation)) {
+            $this->realisations->add($realisation);
+            $realisation->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRealisation(Realisation $realisation): static
+    {
+        if ($this->realisations->removeElement($realisation)) {
+            // set the owning side to null (unless already changed)
+            if ($realisation->getCategorie() === $this) {
+                $realisation->setCategorie(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string {
+        return $this->name;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }
