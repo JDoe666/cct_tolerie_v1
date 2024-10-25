@@ -57,7 +57,7 @@
 									<a href="{{ path('app_profile_index') }}">Mon compte</a>
 								</li>
 								<li class="item">
-									<a href="">Mes devis</a>
+									<a href="{{ path('app_profile_devis_index')}}">Mes devis</a>
 								</li>
 								<li class="item">
 									<a href="{{ path('app_logout') }}" data-turbo="false">Déconnexion</a>
@@ -68,6 +68,9 @@
 				{% elseif app.user.isVerified == false %}
 					<li>
 						<a href="{{ path('app_profile_index') }}">Mon compte</a>
+					</li>
+					<li>
+						<a href="{{ path('app_logout') }}">Déconnexion</a>
 					</li>
 				{% endif %}
 			{% else %}
