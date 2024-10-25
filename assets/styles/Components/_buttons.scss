@@ -165,9 +165,10 @@
 }
 
 .categorie-link:hover {
+    color: $red;
     .image-after div::before {
         top: 0.5rem;
         left: 0.5rem;
     }
-    color: $red;
+    
 }
