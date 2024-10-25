@@ -82,8 +82,11 @@ header nav>ul>li{
 .burger{
     width: 32px;
     height: 32px;
-    background-color: white;
     display: none;
+    i {
+        font-size: 32px;
+        color: white;
+    }
 }
 
 @media all and (max-width: 950px) {

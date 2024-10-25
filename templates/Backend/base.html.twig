@@ -37,6 +37,11 @@
 					<p>Êtes vous sur de vouloir supprimer cette réalisation ?
 					</p>
 					<p>Si vous supprimez cette réalisation vous ne pourrez plus revenir en arrière, elle n'existera plus.</p>
+				{% elseif app.request.attributes.get('_route') == 'admin_users_index' %}
+					<p class="bold">Supprimer l'utilisateur ?</p>
+					<p>Êtes vous sur de vouloir supprimer cet utilisateur ?
+					</p>
+					<p>Si vous supprimez cet utilisateur vous ne pourrez plus revenir en arrière, il n'existera plus.</p>
 				{% elseif app.request.attributes.get('_route') == 'admin_devis_update' %}
 					<i class="bi bi-exclamation-triangle-fill"></i>
 					<p class="bold">Modifier le status du devis</p>
