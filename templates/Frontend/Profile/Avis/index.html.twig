@@ -17,7 +17,7 @@
                 {% if avis == null %}
                    <p class="bold">Vous n'avez pas encore renseigné d'avis ?</p>
                    <div class="mt-2"><a href="{{path('app_avis_create')}}" class="button button-update">Ajouter un avis</a></div>
-                {% endif %}
+                {% else %}
 				<div class="address-wrapper">
 						<div class="address-card">
 							<div class="address-card-header">
@@ -38,6 +38,7 @@
 							</div>
 						</div>
 				</div>
+				{% endif %}
 				{# <a href="{{ path('app_profile_address_create') }}" class="button button-update">Ajouter une autre adresse</a> #}
 			</div>
 		</div>
