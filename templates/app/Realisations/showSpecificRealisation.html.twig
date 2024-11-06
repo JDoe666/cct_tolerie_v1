@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block body %}
+{% include 'FrontEnd/Layout/_arianne.html.twig' %}
 	<section class="container">
 		<div class="flex" style="gap: 48px">
 			<div class="large-8 medium-8 small-12">
@@ -13,7 +14,7 @@
 				<h3 class="mb-2">{{realisation.name}}</h3>
 				<div class="image-after">
 					<div>
-						<img {{stimulus_controller('lightbox')}} class="large-12" src="{{ vich_uploader_asset(realisation)}}" alt="Image de la réalisation liée a la page actuelle">
+						<img {{stimulus_controller('lightbox')}} class="large-12 cursor-pointer" src="{{ vich_uploader_asset(realisation)}}" alt="Image de la réalisation liée a la page actuelle">
 					</div>
 				</div>
 				<p class="mt-2">{{realisation.description}}</p>
@@ -36,6 +37,7 @@
 			<div class="large-4 medium-4 small-12">
 				<h3 class="mb-2">Dans la même catégorie</h3>
 				{% for realisation in realisationsSameCategory %}
+				<a class="categorie-link" href="{{path('app_realisations_name', {slugr: realisation.slug, id: realisation.id, slug: category.slug})}}">
 					<div class="mb-5">
 						<div class="image-after mb-3">
 							<div>
@@ -44,6 +46,7 @@
 						</div>
 						<p class="bold">{{realisation.name}}</p>
 					</div>
+				</a>
 				{% endfor %}
 			</div>
 		</div>

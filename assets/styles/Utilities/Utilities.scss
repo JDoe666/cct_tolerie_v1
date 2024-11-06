@@ -69,6 +69,18 @@
     border-radius: 4px;
 }
 
+.cursor-pointer {
+    cursor:pointer;
+}
+
+.ariane {
+    padding: 16px 64px;
+    background-color: $yellow;
+    a {
+        color: $dark;
+    }
+}
+
 #devis-btn {
     margin-top:0.8rem;
     display: block;

@@ -53,6 +53,15 @@ export default class extends Controller {
     burger.addEventListener("click", toggleLateral);
     const mask = document.querySelector(".mask");
     mask.addEventListener("click", closeLateral);
+    /**au chargement :
+     * si je suis sur une fenetre >950 px
+     * => lateral translateX 0
+     * sinon
+     * => lateral translateX -300
+     */
+    document.addEventListener("DOMContentLoaded", () => {
+      testWindowWidth();
+    });
 
     function toggleLateral() {
       if (lateral.classList.contains("lateral-opened")) {
@@ -71,12 +80,20 @@ export default class extends Controller {
       mask.style.display = "none";
     }
 
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 600) {
+    function testWindowWidth() {
+      if (window.innerWidth > 950) {
         closeLateral();
         lateral.style.transform = "translateX(0)";
         mask.style.display = "none";
+      } else {
+        lateral.style.transition = "none";
+        lateral.style.transform = "translateX(-300px)";
+        mask.style.display = "none";
       }
+    }
+
+    window.addEventListener("resize", () => {
+      testWindowWidth();
     });
   }
 }

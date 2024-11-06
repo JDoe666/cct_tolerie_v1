@@ -87,7 +87,7 @@ class AppController extends AbstractController
 
         return $this->render('app/Categories/showCategoriesRealisations.html.twig', [
             'realisations' => $realisations,
-            'categorie' => $category,
+            'category' => $category,
         ]);
     }
 
