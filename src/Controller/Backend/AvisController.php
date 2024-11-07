@@ -3,18 +3,13 @@
 namespace App\Controller\Backend;
 
 use App\Entity\Avis;
-use App\Entity\Filtres\AvisFilter;
-use App\Entity\User;
-use App\Form\Backend\Filtres\SearchAvisType;
-use App\Form\Frontend\UserAvisFormType;
 use App\Repository\AvisRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Routing\Attribute\Route;;
 
 class AvisController extends AbstractController
 {
