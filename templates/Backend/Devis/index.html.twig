@@ -109,7 +109,7 @@
 										{% else %}
 											<p class="border-red border">{{devi.status}}</p>
 										{% endif %}
-										{% if devi.canceledBy == 'admin' %}
+										{% if is_granted('ROLE_SUPER_ADMIN') %}
 											<p>
 												<a href="{{ path('admin_devis_update', {id: devi.id}) }}" id="devis-btn" class="button button-update">Modifier</a>
 											</p>
