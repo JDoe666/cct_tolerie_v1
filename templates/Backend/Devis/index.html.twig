@@ -109,9 +109,13 @@
 										{% else %}
 											<p class="border-red border">{{devi.status}}</p>
 										{% endif %}
-										<p>
-											<a href="{{ path('admin_devis_update', {id: devi.id}) }}" id="devis-btn" class="button button-update">Modifier</a>
-										</p>
+										{% if devi.canceledBy == 'admin' %}
+											<p>
+												<a href="{{ path('admin_devis_update', {id: devi.id}) }}" id="devis-btn" class="button button-update">Modifier</a>
+											</p>
+											{% else %}
+										{% endif %}
+										
 									</div>
 									<div>
 										<p class="bold">Titre</p>
