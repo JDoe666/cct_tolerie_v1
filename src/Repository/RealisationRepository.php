@@ -28,7 +28,7 @@ class RealisationRepository extends ServiceEntityRepository
             ->select('r');
 
         if (!empty($search->getQuery())) {
-            $query = $query->andWhere('r.name LIKE :query OR r.description LIKE :query OR r.categories LIKE :query')
+            $query = $query->andWhere('r.name LIKE :query OR r.description LIKE :query')
                 ->setParameter('query', "%{$search->getQuery()}%");
         }
 

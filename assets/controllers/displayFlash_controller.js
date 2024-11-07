@@ -4,7 +4,7 @@ export default class extends Controller {
     connect() {
         setTimeout(() => {
             this.fadeOut();
-        }, 8000);
+        }, 5000);
     }
 
     fadeOut() {

@@ -6,6 +6,7 @@ use App\Entity\Categorie;
 use App\Entity\Realisation;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,11 +21,11 @@ class RealisationFormType extends AbstractType
                 'label' => 'Nom',
                 'required' => true,
             ])
-            ->add('description', TextType::class, [
+            ->add('description', TextareaType::class, [
                 'label' => 'Description',
                 'required' => true,            ])
             ->add('imageFile', VichImageType::class, [
-                'required' => false,
+                'required' => true,
                 'download_uri' => false,
                 'image_uri' => true,
                 'asset_helper' => true,
