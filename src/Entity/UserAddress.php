@@ -34,9 +34,20 @@ class UserAddress
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'userAddresses')]
     private Collection $user;
 
+    /**
+     * @var Collection<int, Devis>
+     */
+    #[ORM\OneToMany(targetEntity: Devis::class, mappedBy: 'address')]
+    private Collection $devis;
+
     public function __construct()
     {
         $this->user = new ArrayCollection();
+        $this->devis = new ArrayCollection();
+    }
+
+    public function __toString(): string {
+        return "$this->address $this->zip_code $this->city";
     }
 
     public function getId(): ?int
@@ -100,6 +111,36 @@ class UserAddress
     public function removeUser(User $user): static
     {
         $this->user->removeElement($user);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Devis>
+     */
+    public function getDevis(): Collection
+    {
+        return $this->devis;
+    }
+
+    public function addDevi(Devis $devi): static
+    {
+        if (!$this->devis->contains($devi)) {
+            $this->devis->add($devi);
+            $devi->setAddress($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDevi(Devis $devi): static
+    {
+        if ($this->devis->removeElement($devi)) {
+            // set the owning side to null (unless already changed)
+            if ($devi->getAddress() === $this) {
+                $devi->setAddress(null);
+            }
+        }
 
         return $this;
     }

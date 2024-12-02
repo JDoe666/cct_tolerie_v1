@@ -1,0 +1,38 @@
+{% extends 'Backend/base.html.twig' %}
+
+{% block title %}
+	{{parent()}}
+	Avis
+{% endblock %}
+
+{% block body %}
+	<section class="container">
+		<div class="container wrapper-cards-3">
+			{% for avi in avis %}
+				<div class="card-admin">
+					<div class="card-admin-content">
+						<div class="card-admin-content-description">
+							<h3>Prénom</h3>
+							<p>{{avi.firstname}}</p>
+						</div>
+						<div class="card-admin-content-description">
+							<h3>Nom</h3>
+							<p>{{avi.lastname}}</p>
+						</div>
+						<div class="card-admin-content-description">
+							<h3>Contenu de l'avis</h3>
+							<p>{{avi.comment}}</p>
+						</div>
+						<div class="card-admin-content-description">
+							<h3>Création</h3>
+							<p>{{avi.createdAt|date("d-m-Y")}}</p>
+						</div>
+					</div>
+					<div class="card-avis-footer text-center">
+						{% include 'Backend/Avis/delete.html.twig' %}
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</section>
+{% endblock %}

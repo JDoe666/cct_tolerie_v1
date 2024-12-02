@@ -1,0 +1,4 @@
+<form class="mt-1" action="{{ path('app_devis_cancel', {id: devis.id}) }}" method="POST" {{stimulus_controller('modal')}}>
+	<input type="hidden" name="token" value="{{ csrf_token('delete' ~ devis.id) }}">
+	<button type="submit" class="button button-card-delete">Annuler le devis</button>
+</form>

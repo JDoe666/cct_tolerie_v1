@@ -1,23 +1,23 @@
 {% for flash in app.flashes('success') %}
-	<div class="alert alert-success">
+	<div class="alert alert-success" {{ stimulus_controller('displayFlash')}}>
 		{{ flash }}
 	</div>
 {% endfor %}
 
 {% for flash in app.flashes('danger') %}
-	<div class="alert alert-danger">
+	<div class="alert alert-danger" {{ stimulus_controller('displayFlash')}}>
 		{{ flash }}
 	</div>
 {% endfor %}
 
 {% for flash in app.flashes('warning') %}
-	<div class="alert alert-warning">
+	<div class="alert alert-warning" {{ stimulus_controller('displayFlash')}}>
 		{{ flash }}
 	</div>
 {% endfor %}
 
 {% for flash in app.flashes('info') %}
-	<div class="alert alert-info">
+	<div class="alert alert-info" {{ stimulus_controller('displayFlash')}}>
 		{{ flash }}
 	</div>
 {% endfor %}

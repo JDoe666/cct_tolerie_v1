@@ -1,0 +1,11 @@
+<div class="container admin-pagination-droppable dropdown-pagination-content">
+	<div class="admin-pagination-droppable-container-sort">
+		{{ knp_pagination_sortable(realisations, 'Nom (descendant)', 'r.name', {'direction': 'DESC'}) }}
+	</div>
+	<div class="admin-pagination-droppable-container-sort">
+		{{ knp_pagination_sortable(realisations, 'Categorie (descendant)', 'r.categories', {'direction': 'DESC'}) }}
+	</div>
+	<div class="admin-pagination-droppable-container-sort">
+		{{ knp_pagination_sortable(realisations, 'Date (descendant)', 'r.createdAt', {'direction': 'DESC'}) }}
+	</div>
+</div>

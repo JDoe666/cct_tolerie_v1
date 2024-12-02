@@ -43,8 +43,16 @@ class CategorieController extends AbstractController
 
     #[Route('/create', name: '_create', methods: ['GET', 'POST'])]
     public function create(Request $request): Response
-    {
+    {   
+        $user = $this->getUser();
         $categorie = new Categorie();
+        $categorie->setUser($user);
+        
+        if (!$user) {
+            $this->addFlash('danger', 'Vous devez être connecté pour créer une catégorie');
+
+            return $this->redirectToRoute('app_login');
+        }
 
         $form = $this->createForm(CategorieFormType::class, $categorie);
         $form->handleRequest($request);
@@ -94,7 +102,7 @@ class CategorieController extends AbstractController
         if (!$categorie) {
             $this->addFlash('danger', 'Categorie introuvable');
 
-           return $this->redirectToRoute('admin_categorie_delete');
+           return $this->redirectToRoute('admin_categorie_index');
         } 
 
         if ($this->isCsrfTokenValid('delete' . $categorie->getId(), $request->request->get('token'))) {

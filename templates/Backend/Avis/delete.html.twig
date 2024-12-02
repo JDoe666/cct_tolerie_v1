@@ -1,0 +1,7 @@
+<form action="{{ path('admin_avis_delete', {id: avi.id}) }}" method="POST" {{stimulus_controller('modal')}}>
+	<input type="hidden" name="token" value="{{ csrf_token('delete' ~ avi.id) }}">
+	<div class="text-center">
+		<button type="submit" class="button button-card-delete">Supprimer</button>
+	</div>
+	
+</form>

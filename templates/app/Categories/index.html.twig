@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}}
+	Catégories
+{% endblock %}
+
+{% block body %}
+	<section class="container">
+		<div>
+			<h1>Catégories</h1>
+			<p class="bold mb-2">Voiçi toute nos catégories</p>
+			<p>Vous pouvez retrouver les salles de bains, les cuisines, les escaliers et beaucoup d'autres.</p>
+		</div>
+	</section>
+	<section class="container">
+		<div class="flex" style="gap: 48px">
+			{% for categorie in categories %}
+				<div class="large-4 medium-4 small-12 mb-5">
+					<a href="{{path('app_categories_name', {slug: categorie.slug})}}" class="categorie-link">
+						<div class="image-after image-categories">
+							<div>
+								{% if categorie.imageName|length > 0 %}
+									<img class="large-12" src="{{ vich_uploader_asset(categorie)}}" alt="">
+								{% endif %}
+							</div>
+						</div>
+						<h3 class="mt-3">{{categorie.name}}</h3>
+					</a>
+				</div>
+			{% endfor %}
+
+		</div>
+	</section>
+
+{% endblock %}

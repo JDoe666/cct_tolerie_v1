@@ -1,0 +1,41 @@
+$gutter: 48px;
+
+@function large($i){
+  @return calc((100% / (12 / $i)) - (((12 / $i) - 1) * $gutter) / (12 / $i)); 
+}
+
+@mixin largeur-modifier {
+  @for $i from 1 to 13{
+    &-#{$i}{
+      width : large($i);
+    }
+  }
+}
+
+.large{
+  @include largeur-modifier;
+}
+
+@media all and (max-width : 960px){
+  .medium{
+  @include largeur-modifier;
+  }
+}
+
+@media all and (max-width : 600px){
+  .small{
+    @include largeur-modifier;
+  }
+
+  .first {
+    order: 1;
+  }
+
+  .second {
+    order: 2;
+  }
+
+  .thrid {
+    order:3;
+  }
+}

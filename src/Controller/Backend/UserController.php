@@ -25,7 +25,8 @@ class UserController extends AbstractController
 
     #[Route('', name: '_index', methods: ['GET'])]
     public function index(Request $request): Response
-    {
+    {   
+
         $data = new UserFilter;
 
         $data->setPage($request->get('page', 1));
@@ -35,7 +36,6 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         $users = $this->userRepository->findUserData($data);
-
 
         return $this->render('Backend/Users/index.html.twig', [
             'users' => $users,

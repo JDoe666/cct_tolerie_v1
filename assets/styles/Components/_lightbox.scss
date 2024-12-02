@@ -1,0 +1,27 @@
+.light-box {
+    display:none;
+    opacity: 0;
+    background-color: #333333d3;
+    width: 100%;
+    height: 100vh;
+    z-index: 100;
+    position: fixed;
+    top:0;
+    left:0;
+    transition: opacity 0.3s ease-out;
+    img {
+        width: 75%;
+        display:block;
+    }
+    > div {
+        width: 100%;
+        height: 100vh;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }    
+}
+
+.light-box-active {
+    display: block;
+}

@@ -1,8 +1,8 @@
-.menu .link::after {
+.menu-lateral .link::after {
   content: "";
  
   display: block;
-  height: 0.150rem;
+  height: 0.125rem;
   background: #EBCB8B;
  
   transform: scale(0);
@@ -32,7 +32,7 @@
   }
 }
 
-  .menu .link:hover::after {
+  .menu-lateral .link:hover::after {
     transform: scale(1);
     transform-origin: left;
   }

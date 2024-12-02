@@ -6,7 +6,7 @@ App\Entity\User:
             password: <hashPassword('Test1234!')>
             roles: ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']
         
-        user_{1..50}:
+        user_{1..20}:
             firstname: <word()>
             lastname: <word()>
             email: "<email()>"
